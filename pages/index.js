@@ -10,7 +10,7 @@ import Router from "next/router";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
+const url = dev ? "http://localhost:3000/" : "https://cadex-git-pruebas-1.lugrao.now.sh/";
 
 export default function Home() {
   const { data, error } = useSwr("api/capitulos", fetcher);
