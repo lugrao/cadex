@@ -26,6 +26,7 @@ export default function Home() {
     <Layout>
       <div id="app" className="container">
         <Navbar />
+        <div className="flecha-abajo"><a href={`#capitulo-${data.length - 1}`}>↓</a></div>
         {data.map((capitulo, index) => {
           return (
             <Capitulo
