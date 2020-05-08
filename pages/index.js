@@ -9,13 +9,16 @@ import Router from "next/router";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
+const dev = process.env.NODE_ENV !== "production";
+const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
+
 export default function Home() {
   const { data, error } = useSwr("api/capitulos", fetcher);
   if (error) return <div>Ocurrió algún error.</div>;
   if (!data) return <div style={{ display: "none" }}>...</div>;
   
   function agregarCapitulo(nuevoCapitulo) {
-    fetch("http://localhost:3000/api/capitulos", {
+    fetch(`${url}api/capitulos`, {
       method: "post",
       body: nuevoCapitulo,
     });

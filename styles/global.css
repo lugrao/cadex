@@ -143,9 +143,10 @@ body {
 
   #redactar {
     text-align: left;
-    margin-left: 2rem;
-    margin-right: 2rem;
     margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
   }
 
   #footer p {
