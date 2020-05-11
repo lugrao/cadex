@@ -2,6 +2,6 @@
     "name": "cadex",
     "version": 2,
     "env": {
-      "MONGODB_URI": "@cadexdbbackup-uri"
+      "MONGODB_URI": "@cadexdb-uri"
     }
   }

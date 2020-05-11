@@ -10,19 +10,19 @@ import Router from "next/router";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000/" : "https://cadex-git-pruebas-1.lugrao.now.sh/";
+const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Home() {
-  const { data, error } = useSwr("api/capitulos", fetcher);
+  const { data, error } = useSwr("api/historias", fetcher);
   if (error) return <div>Ocurrió algún error.</div>;
   if (!data) return <NoDataPage/> ;
 
   const historia = data.historia;
   
   function agregarCapitulo(nuevoCapitulo) {
-    fetch(`${url}api/capitulos`, {
+    fetch(`${url}api/historias`, {
       method: "post",
-      body: nuevoCapitulo,
+      body: JSON.stringify(nuevoCapitulo),
     });
     location.reload();
   }
