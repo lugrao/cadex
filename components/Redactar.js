@@ -20,7 +20,7 @@ export default function Redactar(props) {
 
   function publicar() {
     if (contenido.contenido.length > 9) {
-      props.alPublicar(contenido.contenido);
+      props.alPublicar(contenido);
       setEscribir(false);
       setTextAreaValue("");
       setPocosCaracteres(false);
