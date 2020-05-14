@@ -5,24 +5,25 @@ import Capitulo from "../components/Capitulo";
 import Footer from "../components/Footer";
 import SinData from "../components/SinData";
 import useSwr from "swr";
-import Router from "next/router";
-
-const sala = "principal";
+import { useRouter } from "next/router";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
-export default function Home() {
-  const { data, error } = useSwr(`api/historia/${sala}`, fetcher);
-  if (error) return <SinData texto= "Ocurrió algún error."/>;
+export default function Historia() {
+  const router = useRouter();
+  const idHistoria = router.query.id;
+
+  const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher);
+  if (error) return <SinData texto= "Ocurrió algún error." error={error}/>;
   if (!data) return <SinData texto="Cargando..."/> ;
 
   const historia = data.historia;
-  
+
   function agregarCapitulo(nuevoCapitulo) {
-    fetch(`${url}api/publicar/${sala}`, {
+    fetch(`${url}api/publicar/${idHistoria}`, {
       method: "post",
       body: JSON.stringify(nuevoCapitulo),
     });
@@ -33,7 +34,9 @@ export default function Home() {
     <Layout>
       <div id="app" className="container">
         <Navbar sala={data.salaNombre} />
-        <div className="flecha-abajo"><a href={`#capitulo-${historia.length - 1}`}>↓</a></div>
+        <div className="flecha-abajo">
+          <a href={`#capitulo-${historia.length - 1}`}>↓</a>
+        </div>
         {historia.map((capitulo, index) => {
           return (
             <Capitulo

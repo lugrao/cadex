@@ -105,6 +105,16 @@ body {
   border-color: #f1b228;
 }
 
+#btn-crear-sala {
+  background-color: #f0a500;
+  border-color: #f0a500;
+}
+
+#btn-crear-sala:hover{
+  background-color: #f1b228;
+  border-color: #f1b228;
+}
+
 #footer p {
   margin-bottom: 0;
   color: #c5c5c5;
