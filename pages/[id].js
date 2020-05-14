@@ -35,7 +35,7 @@ export default function Historia() {
       <div id="app" className="container">
         <Navbar sala={data.salaNombre} />
         <div className="flecha-abajo">
-          <a href={`#capitulo-${historia.length - 1}`}>↓</a>
+          <a href={`#capitulo-${historia.length}`}>↓</a>
         </div>
         {historia.map((capitulo, index) => {
           return (
