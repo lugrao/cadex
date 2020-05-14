@@ -29,21 +29,8 @@ export default function Redactar(props) {
     }
   }
 
-  function evitarSubmit(event) {
-    setPocosCaracteres(true);
-
-    return event.preventDefault();
-  }
-
-  function redireccionar() {
-    Router.push("/");
-  }
-
   return (
-    <div
-      id="redactar"
-      className="form"
-    >
+    <div id="redactar" className="form">
       <div>
         <textarea
           placeholder="Escribí el siguiente capítulo, a ver..."
