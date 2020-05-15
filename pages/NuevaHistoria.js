@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import Navbar from "../components/Navbar";
+import Navbarra from "../components/Navbarra";
 import Footer from "../components/Footer";
 import SinData from "../components/SinData";
 import { useState } from "react";
@@ -55,7 +55,7 @@ export default function NuevaHistoria() {
   return (
     <Layout>
       <div id="app" className="container">
-        <Navbar sala="Nueva historia"/>
+        <Navbarra sala="Nueva historia"/>
         <div className="capitulo">
           <h4>Empezá una nueva historia</h4>
           <p>
