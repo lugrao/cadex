@@ -25,8 +25,8 @@ body {
   border-bottom: 1px solid #f3b42b;
 }
 
-.navbar {
-  background-color: #f0a500;
+nav {
+  background-color: #f0a500 !important;
   color: #000000;
   margin-bottom: 2rem;
   border-bottom: 1px solid #d39000;
