@@ -22,7 +22,7 @@ export default function Navbarra(props) {
 
       <Navbar id="navbarra" color="f0a500" light expand="md">
         <NavbarBrand>
-          <b>Cadex</b>
+          <b>Cadex.</b>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
