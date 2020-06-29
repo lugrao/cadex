@@ -1,12 +1,12 @@
 import Layout from "./Layout";
-import Navbarra from "./Navbarra";
+import Nav from "./Nav";
 import Footer from "./Footer";
 
 export default function NoDataPage(props) {
     return (
             <Layout>
                 <div id="app" className="container">
-                    <Navbarra/>
+                    <Nav/>
                     <h5 className="capitulo">{props.texto}</h5>
                     <Footer/>
                 </div>

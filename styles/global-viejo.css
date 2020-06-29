@@ -1,0 +1,166 @@
+/* Hay que refactorizar todo, se entiende. */
+html,
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
+
+#main {
+  background-color: #000000;
+}
+
+#app {
+  background-color: #eee9dd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+#navbar-0 {
+  background-color: #c26e00;
+  height: 1.2rem;
+  border-bottom: 1px solid #f3b42b;
+}
+
+nav {
+  background-color: #f0a500 !important;
+  color: #000000;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #d39000;
+}
+
+.navbar-text {
+  padding-bottom: 0.35rem;
+  margin-right: 1rem;
+}
+
+#navbar-titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 1.5rem;
+}
+
+.flecha-abajo {
+  font-weight: bolder;
+  font-size: 2rem;
+  float: right;
+  max-width: 3rem;
+  margin-right: 20%;
+}
+
+.flecha-abajo a {
+  color: #000000;
+  text-decoration: none;
+}
+.flecha-abajo a:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+.capitulo {
+  background-color: #fcfbfb;
+  text-align: left;
+  padding: 1rem 2rem;
+  margin-top: 1.5px;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  border-bottom: 0.5px solid #c9c9c9;
+  border-right: 0.5px solid #c9c9c9;
+  border-top: 0.5px solid #dfdfdf;
+  border-left: 0.5px solid #dfdfdf;
+}
+
+.capitulo h6 {
+  color: #e2e2e2;
+}
+
+#redactar {
+  text-align: left;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-top: 3rem;
+}
+
+#redactar textarea {
+  background-color: #fafcfd;
+}
+
+#btn-redactar {
+  color: #fff8bd;
+  margin-bottom: 0.8rem;
+}
+
+#btn-publicar {
+  margin-top: 0.8rem;
+  float: right;
+  background-color: #f0a500;
+  border-color: #f0a500;
+}
+
+#btn-publicar:hover {
+  background-color: #f1b228;
+  border-color: #f1b228;
+}
+
+#btn-crear-sala {
+  background-color: #f0a500;
+  border-color: #f0a500;
+}
+
+#btn-crear-sala:hover{
+  background-color: #f1b228;
+  border-color: #f1b228;
+}
+
+#footer p {
+  margin-bottom: 0;
+  color: #c5c5c5;
+  font-style: italic;
+}
+
+#footer {
+  max-width: 10rem;
+  margin: 14% auto 0;
+  padding-bottom: 10px;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 1199px) {
+  #navbar-titulo,
+  .navbar-text {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flecha-abajo {
+    float: right;
+    max-width: 3rem;
+    margin-right: 5%;
+  }
+
+  .capitulo {
+    padding: 1rem 2rem;
+    margin-top: 1.5px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
+  }
+
+  #redactar {
+    text-align: left;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
+  }
+
+  #footer p {
+    padding-top: 1.3rem;
+    font-size: 0.8rem;
+  }
+}

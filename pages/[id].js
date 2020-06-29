@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import Navbarra from "../components/Navbarra";
+import Nav from "../components/Nav";
 import Redactar from "../components/Redactar";
 import Capitulo from "../components/Capitulo";
 import Footer from "../components/Footer";
@@ -33,7 +33,7 @@ export default function Historia() {
   return (
     <Layout>
       <div id="app" className="container">
-        <Navbarra sala={data.salaNombre} />
+        <Nav sala={data.salaNombre} />
         <div className="flecha-abajo">
           <a href={`#capitulo-${historia.length}`}>↓</a>
         </div>

@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import Navbarra from "../components/Navbarra";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import SinData from "../components/SinData";
 import { useState } from "react";
@@ -16,6 +16,7 @@ export default function NuevaHistoria() {
   const [nombreDeSala, setNombreDeSala] = useState("");
   const [urlDeSala, setUrlDeSala] = useState("");
   const [urlNoDisponible, setUrlNoDisponible] = useState(false);
+  const [enInicio, setEnInicio] = useState(true);
 
   const { data, error } = useSwr(`${url}api/historias`, fetcher);
   if (error) return <SinData texto="Ocurrió algún error." error={error} />;
@@ -43,19 +44,22 @@ export default function NuevaHistoria() {
     if (urlDeSala) {
       fetch(`${url}api/nueva-historia/`, {
         method: "post",
-        body: JSON.stringify({ sala: urlDeSala }),
+        body: JSON.stringify({ sala: urlDeSala, enInicio: enInicio }),
       });
       Router.push(`/${urlDeSala}`);
     } else {
       return setUrlNoDisponible(true);
     }
-    
+  }
+
+  function cambiarCheckbox() {
+    return setEnInicio(!enInicio);
   }
 
   return (
     <Layout>
       <div id="app" className="container">
-        <Navbarra sala="Nueva historia"/>
+        <Nav sala="Nueva historia" />
         <div className="capitulo">
           <h4>Empezá una nueva historia</h4>
           <p>
@@ -75,6 +79,21 @@ export default function NuevaHistoria() {
             <div className="invalid-feedback">Nombre no disponible.</div>
           )}
           <br />
+
+          <div class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enInicio"
+              onChange={cambiarCheckbox}
+              checked={enInicio}
+            />
+            <label class="custom-control-label" for="enInicio">
+              Mostrar sala en el Inicio
+            </label>
+          </div>
+          <br />
+
           <p>
             La URL de tu sala será{" "}
             <b>
@@ -86,8 +105,11 @@ export default function NuevaHistoria() {
               </b>
             </b>
           </p>
-          {/* <br /> */}
-          <button id="btn-crear-sala" className="btn btn-warning" onClick={!urlNoDisponible && crearNuevaHistoria}>
+          <button
+            id="btn-crear-sala"
+            className="btn btn-warning"
+            onClick={!urlNoDisponible && crearNuevaHistoria}
+          >
             Crear
           </button>
         </div>
