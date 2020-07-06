@@ -6,6 +6,7 @@ import Historia from "../components/Historia";
 import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState, useEffect } from "react";
+import io from "socket.io-client";
 
 const sala = "principal";
 
@@ -27,11 +28,11 @@ export default function Home() {
     setSalaActiva({
       salaURL: event.target.id,
     });
-    console.log(event.target.id);
+    // console.log(event.target.id);
   }
 
-  console.log(salaActiva);
-  console.log(data);
+  // console.log(salaActiva);
+  // console.log(data);
 
   if (error) return <SinData texto="Ocurrió algún error." />;
   if (!data) return <SinData texto="Cargando..." />;
@@ -56,7 +57,12 @@ export default function Home() {
             <ul>
               {salas.salasEnInicio.map((sala, index) => {
                 return (
-                  <li key={index} value={sala.salaURL} id={sala.salaURL} onClick={cambiarHistoria}>
+                  <li
+                    key={index}
+                    value={sala.salaURL}
+                    id={sala.salaURL}
+                    onClick={cambiarHistoria}
+                  >
                     {sala.salaNombre}
                   </li>
                 );
