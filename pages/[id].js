@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -16,19 +17,27 @@ export default function Historia() {
   const router = useRouter();
   const idHistoria = router.query.id;
 
-  const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher);
-  if (error) return <SinData texto= "Ocurrió algún error." error={error}/>;
-  if (!data) return <SinData texto="Cargando..."/> ;
+  const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher, {
+    refreshInterval: 1,
+  });
 
-  const historia = data.historia;
+  const [historia, setHistoria] = useState([]);
+  useEffect(() => {
+    if (data) {
+      setHistoria(data.historia);
+    }
+  });
 
   function agregarCapitulo(nuevoCapitulo) {
     fetch(`${url}api/publicar/${idHistoria}`, {
       method: "post",
       body: JSON.stringify(nuevoCapitulo),
     });
-    location.reload();
+    // location.reload();
   }
+
+  if (error) return <SinData texto="Ocurrió algún error." error={error} />;
+  if (!data) return <SinData texto="Cargando..." />;
 
   return (
     <Layout>
