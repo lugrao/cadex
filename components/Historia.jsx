@@ -10,25 +10,20 @@ const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Historia(props) {
-  const { data, error } = useSwr(`api/historia/${props.urlSala}`, fetcher);
+  const { data, error, revalidate } = useSwr(
+    `api/historia/${props.urlSala}`,
+    fetcher,
+    {
+      refreshInterval: 1,
+    }
+  );
 
-  const [historia, setHistoria] = useState(null);
+  const [historia, setHistoria] = useState(data);
   const [idHistoria, setIdHistoria] = useState("");
 
-  // useEffect(() => {
-  //   setHistoria(data);
-  //   if (data) setIdHistoria(data._id);
-  // }),
-  //   [];
-
   useEffect(() => {
-    fetch(`/api/historia/${props.urlSala}`).then(async (res) => {
-      const historia = await res.json();
-      console.log(historia);
-      setHistoria(historia);
-      setIdHistoria(historia._id);
-    });
-  });
+    setHistoria(data);
+    if (data) setIdHistoria(data._id);
 
   if (error) return <p>Hubo algún error.</p>;
   if (!data) return <p>Elegí una historia de acá a la izquierda.</p>;
@@ -48,7 +43,7 @@ export default function Historia(props) {
       <Redactar urlSala={props.urlSala} />
       <p>
         <Link href={props.urlSala}>
-          <a>Ir a la sala</a>
+      <a>Ir a la sala</a>
         </Link>
       </p>
     </div>
