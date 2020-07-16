@@ -11,6 +11,8 @@
   "author": "lugrao",
   "license": "ISC",
   "dependencies": {
+    "@auth0/nextjs-auth0": "^0.15.0",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.19",
     "mongodb": "^3.5.7",
     "next": "^9.3.6",
