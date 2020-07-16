@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Router from "next/router";
 
 export default function Redactar(props) {
   const [escribir, setEscribir] = useState(false);
@@ -8,7 +7,7 @@ export default function Redactar(props) {
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
 
   function desplegarTextArea() {
-    !escribir ? setEscribir(true) : setEscribir(false);
+    setEscribir(!escribir);
   }
 
   function actualizarContenido(event) {
@@ -20,7 +19,11 @@ export default function Redactar(props) {
 
   function publicar() {
     if (contenido.contenido.length > 9) {
-      props.alPublicar(contenido);
+      fetch(`/api/publicar/${props.urlSala}`, {
+        method: "post",
+        body: JSON.stringify(contenido),
+      });
+
       setEscribir(false);
       setTextAreaValue("");
       setPocosCaracteres(false);
@@ -30,10 +33,9 @@ export default function Redactar(props) {
   }
 
   return (
-    <div id="redactar" className="form">
-      <div>
+    <div id="redactar" className="redactar">
         <textarea
-          placeholder="Escribí el siguiente capítulo, a ver..."
+          placeholder="Escribí el siguiente capítulo..."
           rows={escribir ? "4" : "1"}
           maxLength="300"
           className={
@@ -45,7 +47,7 @@ export default function Redactar(props) {
           value={textAreaValue}
         ></textarea>
         {pocosCaracteres && (
-          <div className="invalid-feedback">
+          <div className="pocos-caracteres">
             Mínimo 10 caracteres. Dale que vos tenés talento.
           </div>
         )}
@@ -58,7 +60,6 @@ export default function Redactar(props) {
             Publicar
           </button>
         )}
-      </div>
     </div>
   );
 }
