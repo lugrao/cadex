@@ -1,5 +1,11 @@
 {
   "env": {
-    "MONGODB_URI": "@cadexdb-uri"
+    "MONGODB_URI": "@cadexdb-uri",
+    "AUTH0_DOMAIN": "dev-dtggau-4.us.auth0.com",
+    "AUTH0_CLIENT_ID": "H1eVx0ZIiTxGDbpLiMkfDhmM7KANwap4",
+    "AUTH0_CLIENT_SECRET": "@auth0_client_secret",
+    "REDIRECT_URI": "https://cadex-lugrao.vercel.app/api/callback",
+    "POST_LOGOUT_REDIRECT_URI": "https://cadex-lugrao.vercel.app/",
+    "SESSION_COOKIE_SECRET": "@session_cookie_secret"
   }
 }
