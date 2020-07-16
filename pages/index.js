@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <Layout>
       <div id="app-container" className="app-container">
-        <Nav sala="Principal" user={user} loading={loading} />
+        <Nav sala="Principal" usuario={user} cargando={loading} />
         <div id="salas-historia" className="salas-historia">
           <div id="salas" className="salas">
             {/* {salas.map((sala, index) => {
@@ -76,6 +76,7 @@ export default function Home() {
             key={1}
             salaNombre={salaActiva.salaNombre}
             urlSala={salaActiva.salaURL}
+            usuario={user}
           />
         </div>
 

@@ -1,15 +1,15 @@
 import Link from "next/link";
 
-export default function Nav({ user, loading }) {
-  console.log(user);
+export default function Nav({ usuario, cargando }) {
+  console.log(usuario);
   return (
     <nav id="navbar">
       <h1>Cadex</h1>
       <Link href="index">
         <a>Inicio</a>
       </Link>
-      {!loading &&
-        (user ? (
+      {!cargando &&
+        (usuario ? (
           <Link href="api/auth/logout">
             <a>Logout</a>
           </Link>
@@ -18,9 +18,9 @@ export default function Nav({ user, loading }) {
             <a>Login</a>
           </Link>
         ))}
-      {user && <div className="usuario">
-        <p>{user.name}</p>
-        <img src={user.picture} /></div>}
+      {usuario && <div className="usuario">
+        <p>{usuario.name}</p>
+        <img src={usuario.picture} /></div>}
       <style jsx>{`
         .usuario {
           display:grid;

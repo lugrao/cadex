@@ -38,6 +38,7 @@ export default function Historia(props) {
               id={capitulo._id}
               titulo={index}
               contenido={capitulo.contenido}
+              usuario={props.usuario}
             />
           );
         })}

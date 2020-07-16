@@ -51,23 +51,25 @@ export default function Capitulo(props) {
     >
       <h6>{props.titulo}</h6>
       <p contentEditable={textoEditable}>{props.contenido}</p>
-      <div className="botones-capitulo">
-       {pocosCaracteres && <div className="pocos-caracteres">
-          Mínimo 10 caracteres.
-        </div>}
-        <button
-          className={textoEditable ? "btn-capitulo" : "escondido"}
-          onClick={actualizarCapitulo}
-        >
-          aceptar
-        </button>
-        <button className="btn-capitulo" onClick={activarModoEditable}>
-          editar
-        </button>
-        <button className="btn-capitulo" onClick={eliminar}>
-          eliminar
-        </button>
-      </div>
+      {props.usuario && (
+        <div className="botones-capitulo">
+          {pocosCaracteres && (
+            <div className="pocos-caracteres">Mínimo 10 caracteres.</div>
+          )}
+          <button
+            className={textoEditable ? "btn-capitulo" : "escondido"}
+            onClick={actualizarCapitulo}
+          >
+            aceptar
+          </button>
+          <button className="btn-capitulo" onClick={activarModoEditable}>
+            editar
+          </button>
+          <button className="btn-capitulo" onClick={eliminar}>
+            eliminar
+          </button>
+        </div>
+      )}
     </div>
   );
 }
