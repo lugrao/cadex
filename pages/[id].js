@@ -1,12 +1,11 @@
 import Layout from "../components/Layout";
-import Navbarra from "../components/Navbarra";
+import Nav from "../components/Nav";
 import Redactar from "../components/Redactar";
 import Capitulo from "../components/Capitulo";
 import Footer from "../components/Footer";
 import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -20,29 +19,23 @@ export default function Historia() {
   const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher, {
     refreshInterval: 1,
   });
+  if (error) return <SinData texto="Ocurrió algún error." error={error} />;
+  if (!data) return <SinData texto="Cargando..." />;
 
-  const [historia, setHistoria] = useState([]);
-  useEffect(() => {
-    if (data) {
-      setHistoria(data.historia);
-    }
-  });
+  const historia = data.historia;
 
   function agregarCapitulo(nuevoCapitulo) {
     fetch(`${url}api/publicar/${idHistoria}`, {
       method: "post",
       body: JSON.stringify(nuevoCapitulo),
     });
-    // location.reload();
+    location.reload();
   }
-
-  if (error) return <SinData texto="Ocurrió algún error." error={error} />;
-  if (!data) return <SinData texto="Cargando..." />;
 
   return (
     <Layout>
       <div id="app" className="container">
-        <Navbarra sala={data.salaNombre} />
+        <Nav sala={data.salaNombre} />
         <div className="flecha-abajo">
           <a href={`#capitulo-${historia.length}`}>↓</a>
         </div>
