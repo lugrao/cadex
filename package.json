@@ -11,7 +11,7 @@
   "author": "lugrao",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongodb": "^3.5.7",
     "next": "^9.3.6",
     "next-connect": "^0.6.5",
