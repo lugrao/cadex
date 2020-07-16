@@ -1,11 +1,10 @@
 import Layout from "../components/Layout";
-import Navbarra from "../components/Navbarra";
-import Redactar from "../components/Redactar";
-import Capitulo from "../components/Capitulo";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import Sala from "../components/Sala";
+import Historia from "../components/Historia";
 import SinData from "../components/SinData";
 import useSwr from "swr";
-import Router from "next/router";
 import { useState, useEffect } from "react";
 
 const sala = "principal";
@@ -16,44 +15,66 @@ const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Home() {
-  const { data, error } = useSwr(`api/historia/${sala}`, fetcher, {
-    refreshInterval: 1,
+  const { data, error } = useSwr(`api/salas-en-inicio`, fetcher);
+
+  const [salaActiva, setSalaActiva] = useState({
+    salaURL: "prueba-3",
   });
 
-  const [historia, setHistoria] = useState([]);
-  useEffect(() => {
-    if (data) {
-      setHistoria(data.historia);
-    }
-  });
-  // const historia = data.historia;
+  const salas = data;
 
-  function agregarCapitulo(nuevoCapitulo) {
-    fetch(`${url}api/publicar/${sala}`, {
-      method: "post",
-      body: JSON.stringify(nuevoCapitulo),
+  function cambiarHistoria(event) {
+    setSalaActiva({
+      salaURL: event.target.id,
     });
-    // location.reload();
+    // console.log(event.target.id);
   }
+
+  // console.log(salaActiva);
+  // console.log(data);
+
   if (error) return <SinData texto="Ocurrió algún error." />;
   if (!data) return <SinData texto="Cargando..." />;
+
   return (
     <Layout>
-      <div id="app" className="container">
-        <Navbarra sala={data.salaNombre} />
-        <div className="flecha-abajo">
-          <a href={`#capitulo-${historia.length}`}>↓</a>
+      <div id="app-container" className="app-container">
+        <Nav sala="Principal" />
+        <div id="salas-historia" className="salas-historia">
+          <div id="salas" className="salas">
+            {/* {salas.map((sala, index) => {
+              return (
+                <Sala
+                  key={index}
+                  salaNombre={sala.salaNombre}
+                  capitulos={sala.historia}
+                  urlSala={sala.salaURL}
+                />
+              );
+            })} */}
+
+            <ul>
+              {salas.salasEnInicio.map((sala, index) => {
+                return (
+                  <li
+                    key={index}
+                    value={sala.salaURL}
+                    id={sala.salaURL}
+                    onClick={cambiarHistoria}
+                  >
+                    {sala.salaNombre}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <Historia
+            key={1}
+            salaNombre={salaActiva.salaNombre}
+            urlSala={salaActiva.salaURL}
+          />
         </div>
-        {historia.map((capitulo, index) => {
-          return (
-            <Capitulo
-              key={index}
-              titulo={index + 1}
-              contenido={capitulo.contenido}
-            />
-          );
-        })}
-        <Redactar alPublicar={agregarCapitulo} />
+
         <Footer />
       </div>
     </Layout>
