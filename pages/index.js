@@ -6,7 +6,6 @@ import Historia from "../components/Historia";
 import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState, useEffect } from "react";
-import io from "socket.io-client";
 
 const sala = "principal";
 

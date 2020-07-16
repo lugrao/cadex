@@ -16,9 +16,11 @@ export default function Historia() {
   const router = useRouter();
   const idHistoria = router.query.id;
 
-  const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher);
-  if (error) return <SinData texto= "Ocurrió algún error." error={error}/>;
-  if (!data) return <SinData texto="Cargando..."/> ;
+  const { data, error } = useSwr(`${url}api/historia/${idHistoria}`, fetcher, {
+    refreshInterval: 1,
+  });
+  if (error) return <SinData texto="Ocurrió algún error." error={error} />;
+  if (!data) return <SinData texto="Cargando..." />;
 
   const historia = data.historia;
 

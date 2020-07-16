@@ -24,6 +24,7 @@ export default function Historia(props) {
   useEffect(() => {
     setHistoria(data);
     if (data) setIdHistoria(data._id);
+  });
 
   if (error) return <p>Hubo algún error.</p>;
   if (!data) return <p>Elegí una historia de acá a la izquierda.</p>;
@@ -43,7 +44,7 @@ export default function Historia(props) {
       <Redactar urlSala={props.urlSala} />
       <p>
         <Link href={props.urlSala}>
-      <a>Ir a la sala</a>
+          <a>Ir a la sala</a>
         </Link>
       </p>
     </div>
