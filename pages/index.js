@@ -7,6 +7,8 @@ import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState, useEffect } from "react";
 
+import { useFetchUser } from "../lib/user";
+
 const sala = "principal";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -16,6 +18,8 @@ const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Home() {
   const { data, error } = useSwr(`api/salas-en-inicio`, fetcher);
+  const { user, loading } = useFetchUser();
+  console.log(user);
 
   const [salaActiva, setSalaActiva] = useState({
     salaURL: "prueba-3",
@@ -39,7 +43,7 @@ export default function Home() {
   return (
     <Layout>
       <div id="app-container" className="app-container">
-        <Nav sala="Principal" />
+        <Nav sala="Principal" user={user} loading={loading} />
         <div id="salas-historia" className="salas-historia">
           <div id="salas" className="salas">
             {/* {salas.map((sala, index) => {
