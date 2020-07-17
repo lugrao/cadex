@@ -3,6 +3,8 @@ import { useState } from "react";
 export default function Capitulo(props) {
   const [textoEditable, setTextoEditable] = useState(false);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
+  //props que faltan:
+  // userID de capitulo
 
   function eliminar(event) {
     const idCapitulo = event.target.parentElement.parentElement.id;
@@ -49,9 +51,10 @@ export default function Capitulo(props) {
       className={textoEditable ? "capitulo editable" : "capitulo"}
       id={props.id}
     >
+      <div id="div-oculto"></div>
       <h6>{props.titulo}</h6>
       <p contentEditable={textoEditable}>{props.contenido}</p>
-      {props.usuario && (
+      {props.usuario && props.usuario.sub === props.idUsuario && (
         <div className="botones-capitulo">
           {pocosCaracteres && (
             <div className="pocos-caracteres">Mínimo 10 caracteres.</div>
@@ -70,6 +73,11 @@ export default function Capitulo(props) {
           </button>
         </div>
       )}
+      <style jsx>{`
+        #div-oculto {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 }

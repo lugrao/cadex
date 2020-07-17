@@ -38,11 +38,12 @@ export default function Historia(props) {
               id={capitulo._id}
               titulo={index}
               contenido={capitulo.contenido}
+              idUsuario={capitulo.idUsuario}
               usuario={props.usuario}
             />
           );
         })}
-      <Redactar urlSala={props.urlSala} />
+      <Redactar urlSala={props.urlSala} usuario={props.usuario} />
       <p>
         <Link href={props.urlSala}>
           <a>Ir a la sala</a>

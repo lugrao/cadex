@@ -52,6 +52,7 @@ handler.post(async (req, res) => {
             historia: {
               _id: ObjectId(),
               contenido: data.contenido,
+              idUsuario: data.idUsuario,
             },
           },
         }
