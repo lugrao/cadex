@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function Nav({ usuario, cargando }) {
-  console.log(usuario);
   return (
     <nav id="navbar">
       <h1>Cadex</h1>

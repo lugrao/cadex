@@ -9,7 +9,6 @@ export default function Redactar(props) {
   function desplegarTextArea() {
     setEscribir(!escribir);
   }
-  // console.log(props.usuario.sub);
 
   function actualizarContenido(event) {
     setContenido({

@@ -19,7 +19,6 @@ const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 export default function Home() {
   const { data, error } = useSwr(`api/salas-en-inicio`, fetcher);
   const { user, loading } = useFetchUser();
-  console.log(user);
 
   const [salaActiva, setSalaActiva] = useState({
     salaURL: "prueba-3",
@@ -31,11 +30,7 @@ export default function Home() {
     setSalaActiva({
       salaURL: event.target.id,
     });
-    // console.log(event.target.id);
   }
-
-  // console.log(salaActiva);
-  // console.log(data);
 
   if (error) return <SinData texto="Ocurrió algún error." />;
   if (!data) return <SinData texto="Cargando..." />;
