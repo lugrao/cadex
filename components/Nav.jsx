@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function Nav({ usuario, cargando }) {
+  
   return (
     <nav id="navbar">
       <h1>Cadex</h1>
@@ -17,20 +18,23 @@ export default function Nav({ usuario, cargando }) {
             <a>Login</a>
           </Link>
         ))}
-      {usuario && <div className="usuario">
-        <p>{usuario.name}</p>
-        <img src={usuario.picture} /></div>}
+      {usuario && (
+        <div className="usuario">
+          <p>{usuario.name}</p>
+          <img src={usuario.picture} />
+        </div>
+      )}
       <style jsx>{`
         .usuario {
-          display:grid;
+          display: grid;
           grid-template-columns: 1fr 1fr;
         }
         .usuario p {
-          justify-self:right;
+          justify-self: right;
           padding-right: 10px;
         }
-        img{
-          width:40px;
+        img {
+          width: 40px;
         }
       `}</style>
     </nav>
