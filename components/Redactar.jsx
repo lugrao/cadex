@@ -37,7 +37,7 @@ export default function Redactar(props) {
     <div id="redactar" className="redactar">
       <textarea
         placeholder="Escribí el siguiente capítulo..."
-        rows={escribir ? "4" : "1"}
+        rows={escribir ? "4" : "2"}
         maxLength="300"
         className={pocosCaracteres ? "form-control is-invalid" : "form-control"}
         name="contenido"
@@ -51,13 +51,16 @@ export default function Redactar(props) {
         </div>
       )}
       {escribir && (
-        <button
-          id="btn-publicar"
-          className="btn btn-warning"
-          onClick={publicar}
-        >
-          Publicar
-        </button>
+        <>
+          <br />
+          <button
+            id="btn-publicar"
+            className="btn btn-warning"
+            onClick={publicar}
+          >
+            Publicar
+          </button>
+        </>
       )}
     </div>
   );

@@ -3,6 +3,8 @@ import Link from "next/link";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
+import { Spinner } from "@chakra-ui/core";
+import Layout from "./Layout";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -27,7 +29,12 @@ export default function Historia(props) {
   });
 
   if (error) return <p>Hubo algún error.</p>;
-  if (!data) return <p>Elegí una historia de acá a la izquierda.</p>;
+  if (!data)
+    return (
+      <Layout>
+        <Spinner size="xs" />
+      </Layout>
+    );
   return (
     <div id={idHistoria} className="historia">
       {historia &&
