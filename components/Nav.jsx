@@ -19,7 +19,12 @@ export default function Nav({ usuario, cargando }) {
           <AccordionItem>
             {({ isExpanded }) => (
               <>
-                <AccordionHeader bg="white">
+                <AccordionHeader
+                  bg="white"
+                  border="2px"
+                  borderColor="black"
+                  borderBottom={isExpanded ? "0px" : "2px"}
+                >
                   <Box flex="1" textAlign="left">
                     <Heading as="h1" size="sm">
                       Cadex
@@ -27,7 +32,7 @@ export default function Nav({ usuario, cargando }) {
                   </Box>
                   <Icon size="12px" name={isExpanded ? "minus" : "add"} />
                 </AccordionHeader>
-                <AccordionPanel pb={4}>
+                <AccordionPanel pb={4} border="2px" borderTop="0px">
                   <Stack spacing={30}>
                     <Link href="index">
                       <a>Inicio</a>
