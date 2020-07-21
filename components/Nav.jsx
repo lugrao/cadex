@@ -26,7 +26,7 @@ export default function Nav({ usuario, cargando }) {
                   borderBottom={isExpanded ? "0px" : "2px"}
                 >
                   <Box flex="1" textAlign="left">
-                    <Heading as="h1" size="sm">
+                    <Heading as="h1" size="lg">
                       Cadex
                     </Heading>
                   </Box>
