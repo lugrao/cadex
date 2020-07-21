@@ -51,11 +51,11 @@ export default function Historia(props) {
           );
         })}
       <Redactar urlSala={props.urlSala} usuario={props.usuario} />
-      <p>
+      {/* <p>
         <Link href={props.urlSala}>
           <a>Ir a la sala</a>
         </Link>
-      </p>
+      </p> */}
     </div>
   );
 }

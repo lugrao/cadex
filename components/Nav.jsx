@@ -19,7 +19,7 @@ export default function Nav({ usuario, cargando }) {
           <AccordionItem>
             {({ isExpanded }) => (
               <>
-                <AccordionHeader>
+                <AccordionHeader bg="white">
                   <Box flex="1" textAlign="left">
                     <Heading as="h1" size="sm">
                       Cadex
