@@ -25,7 +25,7 @@ import {
   Select,
 } from "@chakra-ui/core";
 
-export default function Nav(props, { usuario, cargando }) {
+export default function Nav(props) {
   return (
     <Grid
       pos="fixed"
@@ -75,18 +75,20 @@ export default function Nav(props, { usuario, cargando }) {
                   <a>Inicio</a>
                 </Link>
               </MenuItem>
-              <MenuItem>
-                {!cargando &&
-                  (usuario ? (
+              {!props.cargando &&
+                (props.usuario ? (
+                  <MenuItem>
                     <Link href="api/auth/logout">
                       <a>Logout</a>
                     </Link>
-                  ) : (
+                  </MenuItem>
+                ) : (
+                  <MenuItem>
                     <Link href="api/auth/login">
                       <a>Login</a>
                     </Link>
-                  ))}
-              </MenuItem>
+                  </MenuItem>
+                ))}
             </MenuList>
           </React.Fragment>
         )}
