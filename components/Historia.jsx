@@ -56,6 +56,9 @@ export default function Historia(props) {
           <a>Ir a la sala</a>
         </Link>
       </p> */}
+      <style jsx>{`
+        margin-top: 3.5rem;
+      `}</style>
     </div>
   );
 }
