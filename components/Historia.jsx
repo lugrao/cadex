@@ -32,7 +32,7 @@ export default function Historia(props) {
   if (!data)
     return (
       <Layout>
-        <Spinner size="xs" />
+        <Spinner size="xs" marginTop="4rem" marginLeft="1rem"/>
       </Layout>
     );
   return (
