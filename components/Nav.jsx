@@ -11,72 +11,90 @@ import {
   Stack,
 } from "@chakra-ui/core";
 
-export default function Nav({ usuario, cargando }) {
+import {
+  Grid,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  MenuDivider,
+  MenuOptionGroup,
+  MenuItemOption,
+  Select,
+} from "@chakra-ui/core";
+
+export default function Nav(props, { usuario, cargando }) {
   return (
-    <div>
-      <Box>
-        <Accordion defaultIndex={[1]} allowMultiple>
-          <AccordionItem>
-            {({ isExpanded }) => (
-              <>
-                <AccordionHeader
-                  bg="white"
-                  border="2px"
-                  borderColor="black"
-                  borderBottom={isExpanded ? "0px" : "2px"}
-                >
-                  <Box flex="1" textAlign="left">
-                    <Heading as="h1" size="lg">
-                      Cadex
-                    </Heading>
-                  </Box>
-                  <Icon size="12px" name={isExpanded ? "minus" : "add"} />
-                </AccordionHeader>
-                <AccordionPanel pb={4} border="2px" borderTop="0px">
-                  <Stack spacing={30}>
-                    <Link href="index">
-                      <a>Inicio</a>
-                    </Link>
-                    {!cargando &&
-                      (usuario ? (
-                        <Link href="api/auth/logout">
-                          <a>Logout</a>
-                        </Link>
-                      ) : (
-                        <Link href="api/auth/login">
-                          <a>Login</a>
-                        </Link>
-                      ))}
-                    {usuario && (
-                      <div className="usuario">
-                        <p>{usuario.name}</p>
-                        <img src={usuario.picture} />
-                      </div>
-                    )}
-                  </Stack>
-                </AccordionPanel>
-              </>
-            )}
-          </AccordionItem>
-        </Accordion>
-      </Box>
+    <div className="nav">
+      <Grid
+        pos="fixed"
+        w="100%"
+        h="3rem"
+        alignItems="center"
+        templateColumns="1fr 1fr 1fr"
+        gap="15px"
+        bg="black"
+      >
+        <Heading as="h1" size="lg" color="white" bg="black" marginLeft="20px">
+          Cadex
+        </Heading>
+        <Select
+          maxW="200px"
+          size="sm"
+          marginRight="30px"
+          onChange={props.cambiarHistoria}
+          value={props.salaActiva.salaURL}
+        >
+          {props.salas.salasEnInicio.map((sala, index) => {
+            return (
+              <option key={index} value={sala.salaURL}>
+                {sala.salaNombre}
+              </option>
+            );
+          })}
+        </Select>
+        <Menu>
+          {({ isOpen }) => (
+            <React.Fragment>
+              <MenuButton
+                justifySelf="end"
+                marginRight="10px"
+                size="sm"
+                maxW="100px"
+                isActive={isOpen}
+                as={Button}
+                rightIcon="chevron-down"
+              >
+                {isOpen ? "tac" : "tuc"}
+              </MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Link href="index">
+                    <a>Inicio</a>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  {!cargando &&
+                    (usuario ? (
+                      <Link href="api/auth/logout">
+                        <a>Logout</a>
+                      </Link>
+                    ) : (
+                      <Link href="api/auth/login">
+                        <a>Login</a>
+                      </Link>
+                    ))}
+                </MenuItem>
+              </MenuList>
+            </React.Fragment>
+          )}
+        </Menu>
+      </Grid>
     </div>
   );
 }
-
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
-//AGREGAR LINKS A USUARIO Y DEM'AS
 
 function NavVieja({ usuario, cargando }) {
   return (

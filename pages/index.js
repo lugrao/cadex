@@ -45,9 +45,16 @@ export default function Home() {
 
   return (
     <Layout>
-      <Grid gap={3}>
-        <Nav sala="Principal" usuario={user} cargando={loading} />
-        <Select onChange={cambiarHistoria} value={salaActiva.salaURL}>
+      <Grid gap={20}>
+        <Nav
+          sala="Principal"
+          usuario={user}
+          cargando={loading}
+          salas={salas}
+          salaActiva={salaActiva}
+          cambiarHistoria={cambiarHistoria}
+        />
+        {/* <Select onChange={cambiarHistoria} value={salaActiva.salaURL}>
           {salas.salasEnInicio.map((sala, index) => {
             return (
               <option key={index} value={sala.salaURL}>
@@ -55,7 +62,7 @@ export default function Home() {
               </option>
             );
           })}
-        </Select>
+        </Select> */}
         <Historia
           key={1}
           salaNombre={salaActiva.salaNombre}

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ThemeProvider } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 export default function Layout({ children }) {
   return (
@@ -11,6 +11,7 @@ export default function Layout({ children }) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
+      <CSSReset />
       <main id="main">{children}</main>
     </ThemeProvider>
   );
