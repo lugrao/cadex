@@ -27,7 +27,6 @@ import {
 
 export default function Nav(props, { usuario, cargando }) {
   return (
-    <div className="nav">
       <Grid
         pos="fixed"
         w="100%"
@@ -92,7 +91,6 @@ export default function Nav(props, { usuario, cargando }) {
           )}
         </Menu>
       </Grid>
-    </div>
   );
 }
 
