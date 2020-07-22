@@ -46,7 +46,7 @@ export default function Nav(props, { usuario, cargando }) {
         onChange={props.cambiarHistoria}
         value={props.salaURL}
       >
-        {props.salas.salasEnInicio.map((sala, index) => {
+        {props.salasEnInicio.map((sala, index) => {
           return (
             <option key={index} value={sala.salaURL}>
               {sala.salaNombre}

@@ -52,6 +52,7 @@ export default function Home() {
           cargando={loading}
           salas={salas}
           salaURL={salaActiva.salaURL}
+          salasEnInicio={salas.salasEnInicio}
           cambiarHistoria={cambiarHistoria}
         />
         {/* <Select onChange={cambiarHistoria} value={salaActiva.salaURL}>
