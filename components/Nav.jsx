@@ -46,13 +46,14 @@ export default function Nav(props, { usuario, cargando }) {
         onChange={props.cambiarHistoria}
         value={props.salaURL}
       >
-        {props.salasEnInicio.map((sala, index) => {
-          return (
-            <option key={index} value={sala.salaURL}>
-              {sala.salaNombre}
-            </option>
-          );
-        })}
+        {props.salasEnInicio &&
+          props.salasEnInicio.map((sala, index) => {
+            return (
+              <option key={index} value={sala.salaURL}>
+                {sala.salaNombre}
+              </option>
+            );
+          })}
       </Select>
       <Menu>
         {({ isOpen }) => (

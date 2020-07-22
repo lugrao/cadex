@@ -39,6 +39,7 @@ export default function Home() {
           emptyColor="gray.200"
           color="blue.500"
           size="xl"
+          margin="2rem 3rem"
         />
       </Layout>
     );
@@ -52,7 +53,7 @@ export default function Home() {
           cargando={loading}
           salas={salas}
           salaURL={salaActiva.salaURL}
-          salasEnInicio={salas.salasEnInicio ? salas.salasEnInicio : []}
+          salasEnInicio={salas.salasEnInicio}
           cambiarHistoria={cambiarHistoria}
         />
         {/* <Select onChange={cambiarHistoria} value={salaActiva.salaURL}>
