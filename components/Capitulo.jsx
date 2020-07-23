@@ -55,12 +55,12 @@ export default function Capitulo(props) {
 
   function EditableControls({ isEditing, onSubmit, onCancel, onRequestEdit }) {
     return isEditing ? (
-      <ButtonGroup display="flex" justifyContent="flex-end" size="sm">
+      <ButtonGroup display="flex" justifyContent="flex-end" size="sm" mt="15px">
         <IconButton icon="check" onClick={onSubmit} />
         <IconButton icon="close" onClick={onCancel} />
       </ButtonGroup>
     ) : (
-      <Flex justifyContent="flex-end">
+      <Flex justifyContent="flex-end" mt="15px">
         <IconButton size="sm" icon="edit" onClick={onRequestEdit} />
       </Flex>
     );
@@ -69,14 +69,14 @@ export default function Capitulo(props) {
   return (
     <>
       <Box
-        margin="10px 7px"
+        m="10px 7px"
         maxW="30rem"
         p={5}
         shadow="sm"
         borderWidth="1px"
         id={props.id}
       >
-        <Heading fontSize="xs" color="#cccccc" marginBottom="20px">
+        <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
         <Editable
