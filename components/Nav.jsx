@@ -28,6 +28,7 @@ import {
 export default function Nav(props) {
   return (
     <Grid
+      zIndex={1}
       pos="fixed"
       w="100%"
       h="3rem"
