@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Grid gap={20}>
+      <Grid gap={20} justifyContent="center">
         <Nav
           sala="Principal"
           usuario={user}
