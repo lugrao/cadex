@@ -1,4 +1,13 @@
 import { useState } from "react";
+import { Box, Heading, Text } from "@chakra-ui/core";
+import {
+  Editable,
+  EditableInput,
+  EditablePreview,
+  ButtonGroup,
+  IconButton,
+  Flex,
+} from "@chakra-ui/core";
 
 export default function Capitulo(props) {
   const [textoEditable, setTextoEditable] = useState(false);
@@ -44,6 +53,53 @@ export default function Capitulo(props) {
     }
   }
 
+  function EditableControls({ isEditing, onSubmit, onCancel, onRequestEdit }) {
+    return isEditing ? (
+      <ButtonGroup display="flex" justifyContent="flex-end" size="sm">
+        <IconButton icon="check" onClick={onSubmit} />
+        <IconButton icon="close" onClick={onCancel} />
+      </ButtonGroup>
+    ) : (
+      <Flex justifyContent="flex-end">
+        <IconButton size="sm" icon="edit" onClick={onRequestEdit} />
+      </Flex>
+    );
+  }
+
+  return (
+    <>
+      <Box
+        margin="10px 7px"
+        maxW="30rem"
+        p={5}
+        shadow="sm"
+        borderWidth="1px"
+        id={props.id}
+      >
+        <Heading fontSize="xs" color="#cccccc" marginBottom="20px">
+          {props.titulo}
+        </Heading>
+        <Editable
+          textAlign="center"
+          defaultValue={props.contenido}
+          isPreviewFocusable={false}
+          submitOnBlur={false}
+        >
+          {(props) => (
+            <>
+              <EditablePreview />
+              <EditableInput />
+              <EditableControls {...props} />
+            </>
+          )}
+        </Editable>
+        {/* <Text mt={4}>{props.contenido}</Text> */}
+      </Box>
+    </>
+  );
+}
+
+function capituloViejo() {
   return (
     <div
       className={textoEditable ? "capitulo editable" : "capitulo"}

@@ -37,7 +37,7 @@ export default function Nav(props) {
       bg="black"
     >
       <Heading as="h1" size="lg" color="white" bg="black" marginLeft="20px">
-        Cadex
+        <Link href="index">Cadex</Link>
       </Heading>
       <Select
         maxW="200px"
@@ -67,7 +67,7 @@ export default function Nav(props) {
               as={Button}
               rightIcon="chevron-down"
             >
-              {isOpen ? "tac" : "tuc"}
+              {isOpen ? "Menos" : "Más"}
             </MenuButton>
             <MenuList>
               <MenuItem>

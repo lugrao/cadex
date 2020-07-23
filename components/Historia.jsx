@@ -3,7 +3,7 @@ import Link from "next/link";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Spinner } from "@chakra-ui/core";
+import { Spinner, Stack } from "@chakra-ui/core";
 import Layout from "./Layout";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
