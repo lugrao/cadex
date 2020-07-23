@@ -1,29 +1,16 @@
 import Link from "next/link";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-  Icon,
-  Heading,
-  Stack,
-} from "@chakra-ui/core";
 
 import {
+  Heading,
   Grid,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuGroup,
-  MenuDivider,
-  MenuOptionGroup,
-  MenuItemOption,
   Select,
 } from "@chakra-ui/core";
+
 
 export default function Nav(props) {
   return (
@@ -38,7 +25,7 @@ export default function Nav(props) {
       bg="black"
     >
       <Heading as="h1" size="lg" color="white" bg="black" marginLeft="20px">
-        <Link href="index">Cadex</Link>
+        <Link href="index"><a>Cadex</a></Link>
       </Heading>
       <Select
         maxW="200px"

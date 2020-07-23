@@ -4,12 +4,26 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  Button,
   ButtonGroup,
   IconButton,
+  Textarea,
   Flex,
 } from "@chakra-ui/core";
 
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/core";
+
 export default function Capitulo(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [textoEditable, setTextoEditable] = useState(false);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
 
@@ -60,9 +74,10 @@ export default function Capitulo(props) {
         <IconButton icon="close" onClick={onCancel} />
       </ButtonGroup>
     ) : (
-      <Flex justifyContent="flex-end" mt="15px">
-        <IconButton size="sm" icon="edit" onClick={onRequestEdit} />
-      </Flex>
+      <ButtonGroup display="flex" justifyContent="flex-end" size="sm" mt="15px">
+        <IconButton icon="edit" onClick={onRequestEdit} />
+        <IconButton icon="delete" onClick={onCancel} />
+      </ButtonGroup>
     );
   }
 
@@ -79,7 +94,40 @@ export default function Capitulo(props) {
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
-        <Editable
+        <Text mt={4}>{props.contenido}</Text>
+        <ButtonGroup
+          display="flex"
+          justifyContent="flex-end"
+          size="sm"
+          mt="15px"
+        >
+          <IconButton icon="edit" onClick={onOpen} />
+          <IconButton icon="delete" />
+        </ButtonGroup>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Editar</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Textarea value={props.contenido} size="lg" rows="10" />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button variantColor="green" mr={3} onClick={onClose}>
+                Aceptar
+              </Button>
+              <Button 
+              // variant="ghost" 
+              onClick={onClose}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+        {/* <Editable
           textAlign="center"
           defaultValue={props.contenido}
           isPreviewFocusable={false}
@@ -92,8 +140,7 @@ export default function Capitulo(props) {
               <EditableControls {...props} />
             </>
           )}
-        </Editable>
-        {/* <Text mt={4}>{props.contenido}</Text> */}
+        </Editable> */}
       </Box>
     </>
   );
