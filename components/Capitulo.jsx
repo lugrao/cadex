@@ -111,7 +111,7 @@ export default function Capitulo(props) {
             <ModalHeader>Editar</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Textarea value={props.contenido} size="lg" rows="10" />
+              <Textarea value={props.contenido} size="xl" rows="10" />
             </ModalBody>
 
             <ModalFooter>
