@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
-import { Textarea, Box, Button } from "@chakra-ui/core";
+import { Textarea, Box, Button, useToast } from "@chakra-ui/core";
 
 export default function Redactar(props) {
   const [escribir, setEscribir] = useState(false);
+  const toast = useToast();
   const [contenido, setContenido] = useState({ contenido: "", idUsuario: "" });
   const [textAreaValue, setTextAreaValue] = useState("");
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
 
   useEffect(() => {
     if (pocosCaracteres) {
+      toast({
+        title: "Mínimo 10 caracteres",
+        description: "Dale que vos tenés talento.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setTimeout(() => {
         setPocosCaracteres(false);
       }, 5000);
@@ -57,7 +65,7 @@ export default function Redactar(props) {
       >
         <Textarea
           size="md"
-          h="10rem"
+          h="7rem"
           focusBorderColor="yellow.500"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
@@ -71,6 +79,7 @@ export default function Redactar(props) {
           onChange={actualizarContenido}
           value={textAreaValue}
         ></Textarea>
+
         <Button
           mt="7px"
           variantColor="yellow"
@@ -81,12 +90,6 @@ export default function Redactar(props) {
           Publicar
         </Button>
       </Box>
-
-      {pocosCaracteres && (
-        <div className="pocos-caracteres">
-          Mínimo 10 caracteres. Dale que vos tenés talento.
-        </div>
-      )}
     </div>
   );
 }
