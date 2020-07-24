@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Textarea, Box, Button } from "@chakra-ui/core";
 
 export default function Redactar(props) {
@@ -6,6 +6,14 @@ export default function Redactar(props) {
   const [contenido, setContenido] = useState({ contenido: "", idUsuario: "" });
   const [textAreaValue, setTextAreaValue] = useState("");
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
+
+  useEffect(() => {
+    if (pocosCaracteres) {
+      setTimeout(() => {
+        setPocosCaracteres(false);
+      }, 5000);
+    }
+  }, [pocosCaracteres]);
 
   function desplegarTextArea() {
     setEscribir(!escribir);
@@ -17,6 +25,7 @@ export default function Redactar(props) {
       idUsuario: props.usuario ? props.usuario.sub : "",
     });
     setTextAreaValue(event.target.value);
+    if (pocosCaracteres) setPocosCaracteres(false);
   }
 
   function publicar() {
@@ -49,6 +58,7 @@ export default function Redactar(props) {
         <Textarea
           size="md"
           h="10rem"
+          focusBorderColor="yellow.500"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
           rows={escribir ? "4" : "2"}
