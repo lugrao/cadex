@@ -73,9 +73,11 @@ export default function Capitulo(props) {
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
+
         <Text mt={4} lineHeight="1.5" whiteSpace="pre-wrap">
           {props.contenido}
         </Text>
+
         <ButtonGroup
           display="flex"
           justifyContent="flex-end"
@@ -99,11 +101,7 @@ export default function Capitulo(props) {
               <Button variantColor="yellow" mr={3} onClick={onClose}>
                 Aceptar
               </Button>
-              <Button
-                onClick={onClose}
-              >
-                Cancelar
-              </Button>
+              <Button onClick={onClose}>Cancelar</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

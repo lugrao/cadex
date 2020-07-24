@@ -28,12 +28,21 @@ export default function Redactar(props) {
   }
 
   function actualizarContenido(event) {
+    const texto = event.target.value;
     setContenido({
-      contenido: event.target.value,
+      contenido: texto,
       idUsuario: props.usuario ? props.usuario.sub : "",
     });
     setTextAreaValue(event.target.value);
     if (pocosCaracteres) setPocosCaracteres(false);
+    if (texto.length === 300)
+      toast({
+        title: "Máximo 300 caracteres",
+        description: "Tu talento excede el límite del capítulo.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
   }
 
   function publicar() {
@@ -64,8 +73,8 @@ export default function Redactar(props) {
         id={props.id}
       >
         <Textarea
-          size="md"
-          h="7rem"
+          // size="md"
+          h="8rem"
           // focusBorderColor="yellow.500"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
@@ -81,7 +90,7 @@ export default function Redactar(props) {
         ></Textarea>
 
         <Button
-          mt="7px"
+          mt="5px"
           variantColor="yellow"
           id="btn-publicar"
           className="btn btn-warning"
