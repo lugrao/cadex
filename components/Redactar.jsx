@@ -38,6 +38,7 @@ export default function Redactar(props) {
     <div id="redactar" className="redactar">
       <Box
         display="grid"
+        gridTemplateRows="3fr 1fr"
         m="10px 7px"
         maxW="30rem"
         p={5}
@@ -46,8 +47,10 @@ export default function Redactar(props) {
         id={props.id}
       >
         <Textarea
-          size="lg"
+          size="md"
+          h="10rem"
           placeholder="Escribí el siguiente capítulo..."
+          isInvalid={pocosCaracteres ? "true" : "false"}
           rows={escribir ? "4" : "2"}
           maxLength="300"
           className={
@@ -60,7 +63,7 @@ export default function Redactar(props) {
         ></Textarea>
         <Button
           mt="7px"
-          variantColor="green"
+          variantColor="yellow"
           id="btn-publicar"
           className="btn btn-warning"
           onClick={publicar}

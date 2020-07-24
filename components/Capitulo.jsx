@@ -115,32 +115,18 @@ export default function Capitulo(props) {
             </ModalBody>
 
             <ModalFooter>
-              <Button variantColor="green" mr={3} onClick={onClose}>
+              <Button variantColor="yellow" mr={3} onClick={onClose}>
                 Aceptar
               </Button>
-              <Button 
-              // variant="ghost" 
-              onClick={onClose}>
+              <Button
+                // variant="ghost"
+                onClick={onClose}
+              >
                 Cancelar
               </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
-
-        {/* <Editable
-          textAlign="center"
-          defaultValue={props.contenido}
-          isPreviewFocusable={false}
-          submitOnBlur={false}
-        >
-          {(props) => (
-            <>
-              <EditablePreview />
-              <EditableInput />
-              <EditableControls {...props} />
-            </>
-          )}
-        </Editable> */}
       </Box>
     </>
   );

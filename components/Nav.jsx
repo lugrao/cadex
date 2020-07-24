@@ -11,38 +11,49 @@ import {
   Select,
 } from "@chakra-ui/core";
 
-
 export default function Nav(props) {
   return (
     <Grid
       zIndex={1}
       pos="fixed"
       w="100%"
-      h="3rem"
+      h="3.5rem"
       alignItems="center"
-      templateColumns="1fr 1fr 1fr"
+      templateColumns="1fr 1.5fr 1fr"
       gap="15px"
       bg="black"
     >
-      <Heading as="h1" size="lg" color="white" bg="black" marginLeft="20px">
-        <Link href="index"><a>Cadex</a></Link>
-      </Heading>
-      <Select
-        maxW="200px"
-        size="sm"
-        marginRight="30px"
-        onChange={props.cambiarHistoria}
-        value={props.salaURL}
+      <Heading
+        as="h1"
+        fontSize="25px"
+        color="yellow.50"
+        bg="black"
+        ml="15px"
+        textShadow="3px 3px #975A16"
       >
-        {props.salasEnInicio &&
-          props.salasEnInicio.map((sala, index) => {
-            return (
-              <option key={index} value={sala.salaURL}>
-                {sala.salaNombre}
-              </option>
-            );
-          })}
-      </Select>
+        <Link href="index">
+          <a>cadex</a>
+        </Link>
+      </Heading>
+      <div style={{ justifySelf: "center" }}>
+        <Select
+          maxW="200px"
+          size="sm"
+          marginRight="30px"
+          onChange={props.cambiarHistoria}
+          value={props.salaURL}
+        >
+          {props.salasEnInicio &&
+            props.salasEnInicio.map((sala, index) => {
+              return (
+                <option key={index} value={sala.salaURL}>
+                  {sala.salaNombre}
+                </option>
+              );
+            })}
+        </Select>
+      </div>
+
       <Menu>
         {({ isOpen }) => (
           <React.Fragment>
