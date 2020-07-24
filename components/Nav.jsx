@@ -22,6 +22,7 @@ export default function Nav(props) {
       templateColumns="1fr 1.5fr 1fr"
       gap="15px"
       bg="black"
+      boxShadow="2px 2px #D69E2E"
     >
       <Heading
         as="h1"
