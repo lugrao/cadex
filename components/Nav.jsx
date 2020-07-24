@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   Heading,
   Grid,
+  Box,
   Button,
   Menu,
   MenuButton,
@@ -26,7 +27,7 @@ export default function Nav(props) {
     >
       <Heading
         as="h1"
-        fontSize="25px"
+        fontSize={["25px", "35px"]}
         color="yellow.50"
         bg="black"
         ml="15px"
@@ -36,11 +37,10 @@ export default function Nav(props) {
           <a>cadex</a>
         </Link>
       </Heading>
-      <div style={{ justifySelf: "center" }}>
+      <Box justifySelf="center" w={["110px", "200px","400px"]}>
         <Select
-          maxW="200px"
           size="sm"
-          marginRight="30px"
+          // marginRight="30px"
           onChange={props.cambiarHistoria}
           value={props.salaURL}
         >
@@ -53,7 +53,7 @@ export default function Nav(props) {
               );
             })}
         </Select>
-      </div>
+      </Box>
 
       <Menu>
         {({ isOpen }) => (

@@ -14,12 +14,12 @@ export default function Redactar(props) {
         title: "Mínimo 10 caracteres",
         description: "Dale que vos tenés talento.",
         status: "error",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
       });
       setTimeout(() => {
         setPocosCaracteres(false);
-      }, 5000);
+      }, 2000);
     }
   }, [pocosCaracteres]);
 
@@ -66,7 +66,7 @@ export default function Redactar(props) {
         <Textarea
           size="md"
           h="7rem"
-          focusBorderColor="yellow.500"
+          // focusBorderColor="yellow.500"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
           rows={escribir ? "4" : "2"}

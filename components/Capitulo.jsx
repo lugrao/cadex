@@ -1,17 +1,10 @@
 import { useState } from "react";
 import { Box, Heading, Text } from "@chakra-ui/core";
 import {
-  Editable,
-  EditableInput,
-  EditablePreview,
   Button,
   ButtonGroup,
   IconButton,
   Textarea,
-  Flex,
-} from "@chakra-ui/core";
-
-import {
   Modal,
   ModalOverlay,
   ModalContent,
@@ -67,20 +60,6 @@ export default function Capitulo(props) {
     }
   }
 
-  function EditableControls({ isEditing, onSubmit, onCancel, onRequestEdit }) {
-    return isEditing ? (
-      <ButtonGroup display="flex" justifyContent="flex-end" size="sm" mt="15px">
-        <IconButton icon="check" onClick={onSubmit} />
-        <IconButton icon="close" onClick={onCancel} />
-      </ButtonGroup>
-    ) : (
-      <ButtonGroup display="flex" justifyContent="flex-end" size="sm" mt="15px">
-        <IconButton icon="edit" onClick={onRequestEdit} />
-        <IconButton icon="delete" onClick={onCancel} />
-      </ButtonGroup>
-    );
-  }
-
   return (
     <>
       <Box
@@ -94,7 +73,9 @@ export default function Capitulo(props) {
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
-        <Text mt={4}>{props.contenido}</Text>
+        <Text mt={4} lineHeight="1.5" whiteSpace="pre-wrap">
+          {props.contenido}
+        </Text>
         <ButtonGroup
           display="flex"
           justifyContent="flex-end"
@@ -119,7 +100,6 @@ export default function Capitulo(props) {
                 Aceptar
               </Button>
               <Button
-                // variant="ghost"
                 onClick={onClose}
               >
                 Cancelar
