@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Spinner, Stack, Skeleton } from "@chakra-ui/core";
-import Layout from "./Layout";
+import { Spinner } from "@chakra-ui/core";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -31,17 +29,15 @@ export default function Historia(props) {
   if (error) return <p>Hubo algún error.</p>;
   if (!data)
     return (
-      <Layout>
-        <Spinner
-          display="grid"
-          thickness="4px"
-          speed="0.25s"
-          emptyColor="gray.200"
-          color="yellow.400"
-          size="xl"
-          margin="7rem auto"
-        />
-      </Layout>
+      <Spinner
+        display="grid"
+        thickness="4px"
+        speed="0.25s"
+        emptyColor="gray.200"
+        color="yellow.400"
+        size="xl"
+        margin="7rem auto 30rem"
+      />
     );
   return (
     <div id={idHistoria} className="historia">
