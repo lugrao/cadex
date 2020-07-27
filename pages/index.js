@@ -6,7 +6,7 @@ import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState } from "react";
 import { useFetchUser } from "../lib/user";
-import { Grid, Select, Spinner } from "@chakra-ui/core";
+import { Grid, Spinner } from "@chakra-ui/core";
 
 const sala = "principal";
 
@@ -39,7 +39,8 @@ export default function Home() {
           emptyColor="gray.200"
           color="blue.500"
           size="xl"
-          margin="2rem 3rem"
+          margin="2rem auto"
+
         />
       </Layout>
     );
@@ -56,15 +57,6 @@ export default function Home() {
           salasEnInicio={salas.salasEnInicio}
           cambiarHistoria={cambiarHistoria}
         />
-        {/* <Select onChange={cambiarHistoria} value={salaActiva.salaURL}>
-          {salas.salasEnInicio.map((sala, index) => {
-            return (
-              <option key={index} value={sala.salaURL}>
-                Sala: {sala.salaNombre}
-              </option>
-            );
-          })}
-        </Select> */}
         <Historia
           key={1}
           salaNombre={salaActiva.salaNombre}

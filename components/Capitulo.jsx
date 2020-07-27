@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/core";
 import {
+  Box,
+  Heading,
+  Text,
   Button,
   ButtonGroup,
   IconButton,
@@ -21,18 +23,23 @@ export default function Capitulo(props) {
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
 
   function eliminar(event) {
-    const idCapitulo = event.target.parentElement.parentElement.id;
     const idHistoria =
+      event.target.parentElement.parentElement.parentElement.parentElement.id;
+    const idCapitulo =
       event.target.parentElement.parentElement.parentElement.id;
+    console.log(idHistoria);
+    console.log(idCapitulo);
+
     const capitulo = {
       idHistoria: idHistoria,
       idCapitulo: idCapitulo,
     };
+    console.log(capitulo);
 
-    fetch(`/api/eliminar-capitulo/`, {
-      method: "post",
-      body: JSON.stringify(capitulo),
-    });
+    // fetch(`/api/eliminar-capitulo/`, {
+    //   method: "post",
+    //   body: JSON.stringify(capitulo),
+    // });
   }
 
   function activarModoEditable() {
@@ -85,7 +92,7 @@ export default function Capitulo(props) {
           mt="15px"
         >
           <IconButton icon="edit" onClick={onOpen} />
-          <IconButton icon="delete" />
+          <IconButton icon="delete" onClick={eliminar} />
         </ButtonGroup>
 
         <Modal isOpen={isOpen} onClose={onClose}>

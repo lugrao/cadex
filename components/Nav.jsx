@@ -23,7 +23,7 @@ export default function Nav(props) {
       templateColumns="1fr 1.5fr 1fr"
       gap="15px"
       bg="black"
-      boxShadow="2px 2px #D69E2E"
+      boxShadow="2px 2px 2px #D69E2E"
     >
       <Heading
         as="h1"
@@ -31,7 +31,7 @@ export default function Nav(props) {
         color="yellow.50"
         bg="black"
         ml="15px"
-        textShadow="3px 3px #975A16"
+        textShadow="3px 3px 1px #975A16"
       >
         <Link href="index">
           <a>cadex</a>

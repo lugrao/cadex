@@ -75,7 +75,6 @@ export default function Redactar(props) {
         <Textarea
           // size="md"
           h="8rem"
-          // focusBorderColor="yellow.500"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
           rows={escribir ? "4" : "2"}
