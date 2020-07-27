@@ -6,7 +6,7 @@ import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState } from "react";
 import { useFetchUser } from "../lib/user";
-import { Grid, Spinner } from "@chakra-ui/core";
+import { Grid, Spinner, Skeleton } from "@chakra-ui/core";
 
 const sala = "principal";
 
@@ -33,15 +33,18 @@ export default function Home() {
   if (!data)
     return (
       <Layout>
-        <Spinner
-          display="grid"
-          thickness="4px"
-          speed="0.25s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-          margin="7rem auto"
-        />
+        <Grid gap={20} justifyContent="center">
+          <Nav />
+          <Spinner
+            display="grid"
+            thickness="4px"
+            speed="0.25s"
+            emptyColor="gray.200"
+            color="yellow.500"
+            size="xl"
+            margin="7rem auto"
+          />
+        </Grid>
       </Layout>
     );
 

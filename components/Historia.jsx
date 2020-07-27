@@ -3,7 +3,7 @@ import Link from "next/link";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Spinner, Stack } from "@chakra-ui/core";
+import { Spinner, Stack, Skeleton } from "@chakra-ui/core";
 import Layout from "./Layout";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -32,7 +32,15 @@ export default function Historia(props) {
   if (!data)
     return (
       <Layout>
-        <Spinner size="xs" marginTop="4rem" marginLeft="1rem"/>
+        <Spinner
+          display="grid"
+          thickness="4px"
+          speed="0.25s"
+          emptyColor="gray.200"
+          color="yellow.400"
+          size="xl"
+          margin="7rem auto"
+        />
       </Layout>
     );
   return (
