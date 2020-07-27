@@ -34,13 +34,13 @@ export default function Home() {
     return (
       <Layout>
         <Spinner
+          display="grid"
           thickness="4px"
           speed="0.25s"
           emptyColor="gray.200"
           color="blue.500"
           size="xl"
-          margin="2rem auto"
-
+          margin="7rem auto"
         />
       </Layout>
     );
