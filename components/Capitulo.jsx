@@ -22,24 +22,16 @@ export default function Capitulo(props) {
   const [textoEditable, setTextoEditable] = useState(false);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
 
-  function eliminar(event) {
-    const idHistoria =
-      event.target.parentElement.parentElement.parentElement.parentElement.id;
-    const idCapitulo =
-      event.target.parentElement.parentElement.parentElement.id;
-    console.log(idHistoria);
-    console.log(idCapitulo);
-
+  function eliminar() {
     const capitulo = {
-      idHistoria: idHistoria,
-      idCapitulo: idCapitulo,
+      idHistoria: props.idHistoria,
+      idCapitulo: props.idCapitulo,
     };
-    console.log(capitulo);
 
-    // fetch(`/api/eliminar-capitulo/`, {
-    //   method: "post",
-    //   body: JSON.stringify(capitulo),
-    // });
+    fetch(`/api/eliminar-capitulo/`, {
+      method: "post",
+      body: JSON.stringify(capitulo),
+    });
   }
 
   function activarModoEditable() {
@@ -47,12 +39,9 @@ export default function Capitulo(props) {
   }
 
   function actualizarCapitulo(event) {
-    const idCapitulo = event.target.parentElement.parentElement.id;
-    const idHistoria =
-      event.target.parentElement.parentElement.parentElement.id;
     const capitulo = {
-      idHistoria: idHistoria,
-      idCapitulo: idCapitulo,
+      idHistoria: props.idHistoria,
+      idCapitulo: props.idCapitulo,
       contenido: event.target.parentElement.previousSibling.innerText,
     };
     if (capitulo.contenido.length > 9) {
@@ -70,12 +59,11 @@ export default function Capitulo(props) {
   return (
     <>
       <Box
-        m="10px 7px"
-        maxW="30rem"
+        m="10px auto"
+        w={["xxs","xs","sm","md","lg"]}
         p={5}
         shadow="sm"
         borderWidth="1px"
-        id={props.id}
       >
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}

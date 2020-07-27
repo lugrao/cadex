@@ -17,7 +17,6 @@ export default function Historia(props) {
       refreshInterval: 1,
     }
   );
-
   const [historia, setHistoria] = useState(data);
   const [idHistoria, setIdHistoria] = useState("");
 
@@ -46,7 +45,8 @@ export default function Historia(props) {
           return (
             <Capitulo
               key={index}
-              id={capitulo._id}
+              idCapitulo={capitulo._id}
+              idHistoria={idHistoria}
               titulo={index}
               contenido={capitulo.contenido}
               idUsuario={capitulo.idUsuario}
