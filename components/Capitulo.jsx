@@ -70,7 +70,7 @@ export default function Capitulo(props) {
 
   return (
     <>
-      <Box m="10px 5px" p={5} shadow="sm">
+      <Box m="10px 10px" p={5} shadow="sm">
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
