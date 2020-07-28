@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import { Grid, Spinner } from "@chakra-ui/core";
 import Footer from "./Footer";
 
-export default function PaginaSinData(props) {
+export default function PaginaSinData() {
   return (
     <Layout>
       <Grid gap={20} justifyContent="center">

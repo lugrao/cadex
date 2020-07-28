@@ -6,13 +6,101 @@ import { useState } from "react";
 import useSwr from "swr";
 import _ from "lodash";
 import Router from "next/router";
+import {
+  Text,
+  Button,
+  Grid,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+} from "@chakra-ui/core";
 
 const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
+const url = dev ? "http://localhost:3000/" : "https://cadex-2.vercel.app/";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function NuevaHistoria() {
+  const [nombreDeSala, setNombreDeSala] = useState("");
+  const [urlDeSala, setUrlDeSala] = useState("");
+  const [urlNoDisponible, setUrlNoDisponible] = useState(false);
+  const [enInicio, setEnInicio] = useState(true);
+  const { data, error } = useSwr(`${url}api/historias`, fetcher);
+
+  function actualizarNombreDeSala(event) {
+    const sala = event.target.value;
+    const urlDeSala = _.kebabCase(_.deburr(sala)).toLowerCase();
+    setNombreDeSala(sala);
+    setUrlDeSala(urlDeSala);
+    chequearUrl(urlDeSala);
+  }
+
+  function chequearUrl(urlDeUsuario) {
+    setUrlNoDisponible(false);
+    const urlsDeDb = data.URLsDeSalas;
+    urlsDeDb.forEach((url) => {
+      if (url === urlDeUsuario) {
+        return setUrlNoDisponible(true);
+      }
+    });
+  }
+
+  function crearNuevaHistoria() {
+    if (urlDeSala) {
+      fetch(`${url}api/nueva-historia/`, {
+        method: "post",
+        body: JSON.stringify({ sala: urlDeSala, enInicio: enInicio }),
+      });
+      Router.push(`/${urlDeSala}`);
+    } else {
+      return setUrlNoDisponible(true);
+    }
+  }
+
+  function cambiarCheckbox() {
+    return setEnInicio(!enInicio);
+  }
+
+  if (error) return <h5>Ocurrió algún error.</h5>;
+  if (!data) return <SinData />;
+
+  return (
+    <Layout>
+      <Nav sala="Nueva historia" />
+      <Grid
+        maxW="30rem"
+        pt="5rem"
+        gridTemplateColumns="minmax(10rem, 30rem)"
+        m="0 auto"
+      >
+        <FormControl>
+          <FormLabel htmlFor="nombre-de-sala">Nombre de la sala:</FormLabel>
+          <Input
+            type="text"
+            id="nombre-de-sala"
+            value={nombreDeSala}
+            onChange={actualizarNombreDeSala}
+          />
+          <Text mt="20px">
+            La URL de tu sala será
+            <b>{` ${url}`}</b>
+            <b style={urlNoDisponible ? { color: "red" } : { color: "green" }}>
+              {urlDeSala}
+            </b>
+          </Text>
+          <Button mt={4} variantColor="yellow" type="submit">
+            Crear
+          </Button>
+        </FormControl>
+      </Grid>
+      {/* <Footer /> */}
+    </Layout>
+  );
+}
+
+function viejaNuevaHistoria() {
   const [nombreDeSala, setNombreDeSala] = useState("");
   const [urlDeSala, setUrlDeSala] = useState("");
   const [urlNoDisponible, setUrlNoDisponible] = useState(false);
