@@ -6,7 +6,7 @@ import SinData from "../components/SinData";
 import useSwr from "swr";
 import { useState } from "react";
 import { useFetchUser } from "../lib/user";
-import { Grid, Spinner, Skeleton } from "@chakra-ui/core";
+import { Grid, Spinner } from "@chakra-ui/core";
 
 const sala = "principal";
 

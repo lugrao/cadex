@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import Toast from "./Toast";
 import { Textarea, Box, Button, useToast } from "@chakra-ui/core";
 
 export default function Redactar(props) {
-  const [escribir, setEscribir] = useState(false);
   const toast = useToast();
   const [contenido, setContenido] = useState({ contenido: "", idUsuario: "" });
   const [textAreaValue, setTextAreaValue] = useState("");
@@ -10,22 +10,12 @@ export default function Redactar(props) {
 
   useEffect(() => {
     if (pocosCaracteres) {
-      toast({
-        title: "Mínimo 5 caracteres",
-        description: "Dale que vos tenés talento.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast(Toast.pocosCaracteres);
       setTimeout(() => {
         setPocosCaracteres(false);
       }, 2000);
     }
   }, [pocosCaracteres]);
-
-  function desplegarTextArea() {
-    setEscribir(!escribir);
-  }
 
   function actualizarContenido(event) {
     const texto = event.target.value;
@@ -36,13 +26,7 @@ export default function Redactar(props) {
     setTextAreaValue(event.target.value);
     if (pocosCaracteres) setPocosCaracteres(false);
     if (texto.length === 400)
-      toast({
-        title: "Máximo 400 caracteres",
-        description: "Tu talento excede el límite del capítulo.",
-        status: "warning",
-        duration: 4000,
-        isClosable: true,
-      });
+      toast(Toast.muchosCaracteres);
   }
 
   function publicar() {
@@ -51,17 +35,14 @@ export default function Redactar(props) {
         method: "post",
         body: JSON.stringify(contenido),
       });
-
-      setEscribir(false);
       setTextAreaValue("");
-      setPocosCaracteres(false);
     } else {
       setPocosCaracteres(true);
     }
   }
 
   return (
-    <div id="redactar" className="redactar">
+    <>
       <Box
         display="grid"
         gridTemplateRows="3fr 1fr"
@@ -79,7 +60,6 @@ export default function Redactar(props) {
             pocosCaracteres ? "form-control is-invalid" : "form-control"
           }
           name="contenido"
-          onClick={!escribir ? desplegarTextArea : null}
           onChange={actualizarContenido}
           value={textAreaValue}
         ></Textarea>
@@ -94,6 +74,6 @@ export default function Redactar(props) {
           Publicar
         </Button>
       </Box>
-    </div>
+    </>
   );
 }

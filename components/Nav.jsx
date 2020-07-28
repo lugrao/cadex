@@ -40,7 +40,6 @@ export default function Nav(props) {
       <Box justifySelf="center" w={["110px", "200px","400px"]}>
         <Select
           size="sm"
-          // marginRight="30px"
           onChange={props.cambiarHistoria}
           value={props.salaURL}
         >

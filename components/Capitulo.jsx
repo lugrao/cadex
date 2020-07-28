@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Toast from "./Toast";
 import {
   Box,
   Heading,
@@ -27,13 +28,14 @@ export default function Capitulo(props) {
 
   useEffect(() => {
     if (pocosCaracteres) {
-      toast({
-        title: "Mínimo 5 caracteres",
-        description: "Dale que vos tenés talento.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      // toast({
+      //   title: "Mínimo 5 caracteres",
+      //   description: "Dale que vos tenés talento.",
+      //   status: "error",
+      //   duration: 3000,
+      //   isClosable: true,
+      // });
+      toast(Toast.pocosCaracteres);
       setTimeout(() => {
         setPocosCaracteres(false);
       }, 2000);
@@ -63,7 +65,6 @@ export default function Capitulo(props) {
         method: "post",
         body: JSON.stringify(capitulo),
       });
-      setPocosCaracteres(false);
       onClose();
     } else {
       setPocosCaracteres(true);
@@ -103,13 +104,7 @@ export default function Capitulo(props) {
                 onChange={(e) => {
                   setTextoEditable(e.target.value);
                   if (e.target.value.length === 400)
-                    toast({
-                      title: "Máximo 400 caracteres",
-                      description: "Tu talento excede el límite del capítulo.",
-                      status: "warning",
-                      duration: 4000,
-                      isClosable: true,
-                    });
+                    toast(Toast.muchosCaracteres);
                 }}
                 isInvalid={pocosCaracteres ? "true" : "false"}
                 size="xl"
