@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Spinner } from "@chakra-ui/core";
+import { Spinner, Grid } from "@chakra-ui/core";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -39,7 +39,7 @@ export default function Historia(props) {
       />
     );
   return (
-    <div id={idHistoria} className="historia">
+    <Grid maxW="30rem" mt="4rem" gridTemplateColumns="minmax(10rem, 30rem)">
       {historia &&
         historia.historia.map((capitulo, index) => {
           return (
@@ -55,14 +55,6 @@ export default function Historia(props) {
           );
         })}
       <Redactar urlSala={props.urlSala} usuario={props.usuario} />
-      {/* <p>
-        <Link href={props.urlSala}>
-          <a>Ir a la sala</a>
-        </Link>
-      </p> */}
-      <style jsx>{`
-        margin-top: 3.5rem;
-      `}</style>
-    </div>
+    </Grid>
   );
 }

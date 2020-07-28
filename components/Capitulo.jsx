@@ -59,11 +59,10 @@ export default function Capitulo(props) {
   return (
     <>
       <Box
-        m="10px auto"
-        w={["xxs","xs","sm","md","lg"]}
+        m="10px 5px"
         p={5}
         shadow="sm"
-        borderWidth="1px"
+        // borderWidth="1px"
       >
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
