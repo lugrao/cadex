@@ -1,15 +1,23 @@
 import Layout from "./Layout";
 import Nav from "./Nav";
+import { Grid, Spinner } from "@chakra-ui/core";
 import Footer from "./Footer";
 
-export default function NoDataPage(props) {
-    return (
-            <Layout>
-                <div id="app" className="container">
-                    <Nav/>
-                    <h5 className="capitulo">{props.texto}</h5>
-                    <Footer/>
-                </div>
-            </Layout>  
-    );
+export default function PaginaSinData(props) {
+  return (
+    <Layout>
+      <Grid gap={20} justifyContent="center">
+        <Nav />
+        <Spinner
+          display="grid"
+          thickness="4px"
+          speed="0.25s"
+          emptyColor="gray.200"
+          color="yellow.500"
+          size="xl"
+          margin="7rem auto"
+        />
+      </Grid>
+    </Layout>
+  );
 }

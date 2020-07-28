@@ -25,11 +25,7 @@ export default function Capitulo(props) {
 
   const [textoEditable, setTextoEditable] = useState(props.contenido);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
-  console.log("props.usuario: " + props.usuario);
-  if (props.usuario) {
-    console.log("props.usuario.sub: " + props.usuario.sub);
-  }
-  console.log("props.idUsuario: " + props.idUsuario);
+
   useEffect(() => {
     if (pocosCaracteres) {
       toast(Toast.pocosCaracteres);

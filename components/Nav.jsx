@@ -77,6 +77,11 @@ export default function Nav(props) {
                   </MenuItem>
                 </a>
               </Link>
+
+              <MenuItem>
+                <p>Nueva historia</p>
+              </MenuItem>
+
               <Link
                 href={
                   !props.cargandoUsuario && props.usuario

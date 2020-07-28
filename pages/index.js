@@ -30,23 +30,7 @@ export default function Home() {
   }
 
   if (error) return <SinData texto="Ocurrió algún error." />;
-  if (!data)
-    return (
-      <Layout>
-        <Grid gap={20} justifyContent="center">
-          <Nav />
-          <Spinner
-            display="grid"
-            thickness="4px"
-            speed="0.25s"
-            emptyColor="gray.200"
-            color="yellow.500"
-            size="xl"
-            margin="7rem auto"
-          />
-        </Grid>
-      </Layout>
-    );
+  if (!data) return <SinData />;
 
   return (
     <Layout>
