@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Heading,
@@ -15,12 +15,30 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/core";
 
 export default function Capitulo(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [textoEditable, setTextoEditable] = useState(false);
+  const toast = useToast();
+
+  const [textoEditable, setTextoEditable] = useState(props.contenido);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
+
+  useEffect(() => {
+    if (pocosCaracteres) {
+      toast({
+        title: "Mínimo 5 caracteres",
+        description: "Dale que vos tenés talento.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        setPocosCaracteres(false);
+      }, 2000);
+    }
+  }, [pocosCaracteres]);
 
   function eliminar() {
     const capitulo = {
@@ -34,23 +52,19 @@ export default function Capitulo(props) {
     });
   }
 
-  function activarModoEditable() {
-    setTextoEditable(!textoEditable);
-  }
-
-  function actualizarCapitulo(event) {
+  function actualizarCapitulo() {
     const capitulo = {
       idHistoria: props.idHistoria,
       idCapitulo: props.idCapitulo,
-      contenido: event.target.parentElement.previousSibling.innerText,
+      contenido: textoEditable,
     };
-    if (capitulo.contenido.length > 9) {
+    if (capitulo.contenido.length > 4) {
       fetch(`/api/editar-capitulo`, {
         method: "post",
         body: JSON.stringify(capitulo),
       });
-      setTextoEditable(!textoEditable);
       setPocosCaracteres(false);
+      onClose();
     } else {
       setPocosCaracteres(true);
     }
@@ -58,12 +72,7 @@ export default function Capitulo(props) {
 
   return (
     <>
-      <Box
-        m="10px 5px"
-        p={5}
-        shadow="sm"
-        // borderWidth="1px"
-      >
+      <Box m="10px 5px" p={5} shadow="sm">
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
@@ -88,54 +97,42 @@ export default function Capitulo(props) {
             <ModalHeader>Editar</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Textarea value={props.contenido} size="xl" rows="10" />
+              <Textarea
+                value={textoEditable}
+                maxLength="400"
+                onChange={(e) => {
+                  setTextoEditable(e.target.value);
+                  if (e.target.value.length === 400)
+                    toast({
+                      title: "Máximo 400 caracteres",
+                      description: "Tu talento excede el límite del capítulo.",
+                      status: "warning",
+                      duration: 4000,
+                      isClosable: true,
+                    });
+                }}
+                isInvalid={pocosCaracteres ? "true" : "false"}
+                size="xl"
+                rows="10"
+              />
             </ModalBody>
 
             <ModalFooter>
-              <Button variantColor="yellow" mr={3} onClick={onClose}>
+              <Button variantColor="yellow" mr={3} onClick={actualizarCapitulo}>
                 Aceptar
               </Button>
-              <Button onClick={onClose}>Cancelar</Button>
+              <Button
+                onClick={() => {
+                  setTextoEditable(props.contenido);
+                  onClose();
+                }}
+              >
+                Cancelar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
       </Box>
     </>
-  );
-}
-
-function capituloViejo() {
-  return (
-    <div
-      className={textoEditable ? "capitulo editable" : "capitulo"}
-      id={props.id}
-    >
-      <h6>{props.titulo}</h6>
-      <p contentEditable={textoEditable}>{props.contenido}</p>
-      {props.usuario && props.usuario.sub === props.idUsuario && (
-        <div className="botones-capitulo">
-          {pocosCaracteres && (
-            <div className="pocos-caracteres">Mínimo 10 caracteres.</div>
-          )}
-          <button
-            className={textoEditable ? "btn-capitulo" : "escondido"}
-            onClick={actualizarCapitulo}
-          >
-            aceptar
-          </button>
-          <button className="btn-capitulo" onClick={activarModoEditable}>
-            editar
-          </button>
-          <button className="btn-capitulo" onClick={eliminar}>
-            eliminar
-          </button>
-        </div>
-      )}
-      <style jsx>{`
-        #div-oculto {
-          display: none;
-        }
-      `}</style>
-    </div>
   );
 }

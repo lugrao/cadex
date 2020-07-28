@@ -11,7 +11,7 @@ export default function Redactar(props) {
   useEffect(() => {
     if (pocosCaracteres) {
       toast({
-        title: "Mínimo 10 caracteres",
+        title: "Mínimo 5 caracteres",
         description: "Dale que vos tenés talento.",
         status: "error",
         duration: 3000,
@@ -35,9 +35,9 @@ export default function Redactar(props) {
     });
     setTextAreaValue(event.target.value);
     if (pocosCaracteres) setPocosCaracteres(false);
-    if (texto.length === 300)
+    if (texto.length === 400)
       toast({
-        title: "Máximo 300 caracteres",
+        title: "Máximo 400 caracteres",
         description: "Tu talento excede el límite del capítulo.",
         status: "warning",
         duration: 4000,
@@ -68,17 +68,13 @@ export default function Redactar(props) {
         m="10px 7px"
         maxW="30rem"
         p={5}
-        // shadow="sm"
-        // borderWidth="1px"
         id={props.id}
       >
         <Textarea
-          // size="md"
           h="8rem"
           placeholder="Escribí el siguiente capítulo..."
           isInvalid={pocosCaracteres ? "true" : "false"}
-          rows={escribir ? "4" : "2"}
-          maxLength="300"
+          maxLength="400"
           className={
             pocosCaracteres ? "form-control is-invalid" : "form-control"
           }
