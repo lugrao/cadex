@@ -25,16 +25,13 @@ export default function Capitulo(props) {
 
   const [textoEditable, setTextoEditable] = useState(props.contenido);
   const [pocosCaracteres, setPocosCaracteres] = useState(false);
-
+  console.log("props.usuario: " + props.usuario);
+  if (props.usuario) {
+    console.log("props.usuario.sub: " + props.usuario.sub);
+  }
+  console.log("props.idUsuario: " + props.idUsuario);
   useEffect(() => {
     if (pocosCaracteres) {
-      // toast({
-      //   title: "Mínimo 5 caracteres",
-      //   description: "Dale que vos tenés talento.",
-      //   status: "error",
-      //   duration: 3000,
-      //   isClosable: true,
-      // });
       toast(Toast.pocosCaracteres);
       setTimeout(() => {
         setPocosCaracteres(false);
@@ -82,15 +79,17 @@ export default function Capitulo(props) {
           {props.contenido}
         </Text>
 
-        <ButtonGroup
-          display="flex"
-          justifyContent="flex-end"
-          size="sm"
-          mt="15px"
-        >
-          <IconButton icon="edit" onClick={onOpen} />
-          <IconButton icon="delete" onClick={eliminar} />
-        </ButtonGroup>
+        {props.usuario && props.usuario.sub === props.idUsuario && (
+          <ButtonGroup
+            display="flex"
+            justifyContent="flex-end"
+            size="sm"
+            mt="15px"
+          >
+            <IconButton icon="edit" onClick={onOpen} />
+            <IconButton icon="delete" onClick={eliminar} />
+          </ButtonGroup>
+        )}
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
