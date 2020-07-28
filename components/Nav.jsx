@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import {
+  Image,
   Heading,
   Grid,
   Box,
@@ -37,7 +38,7 @@ export default function Nav(props) {
           <a>cadex</a>
         </Link>
       </Heading>
-      <Box justifySelf="center" w={["110px", "200px","400px"]}>
+      <Box justifySelf="center" w={["110px", "200px", "400px"]}>
         <Select
           size="sm"
           onChange={props.cambiarHistoria}
@@ -69,25 +70,31 @@ export default function Nav(props) {
               {isOpen ? "Menos" : "Más"}
             </MenuButton>
             <MenuList>
-              <MenuItem>
-                <Link href="index">
-                  <a>Inicio</a>
-                </Link>
-              </MenuItem>
-              {!props.cargando &&
-                (props.usuario ? (
+              <Link href="index">
+                <a>
                   <MenuItem>
-                    <Link href="api/auth/logout">
-                      <a>Logout</a>
-                    </Link>
+                    <p>Inicio</p>
                   </MenuItem>
-                ) : (
-                  <MenuItem>
-                    <Link href="api/auth/login">
-                      <a>Login</a>
-                    </Link>
+                </a>
+              </Link>
+              <Link href={props.usuario ? "api/auth/logout" : "api/auth/login"}>
+                <a>
+                  <MenuItem display="grid" gridTemplateColumns="1fr 1fr">
+                    <p>{[props.usuario ? "Logout" : "Login"]}</p>
+                    <Image
+                      justifySelf="end"
+                      size="25px"
+                      mr="15px"
+                      rounded="full"
+                      src={
+                        props.usuario ? props.usuario.picture : "/usuario.svg"
+                      }
+                      objectFit="cover"
+                      alt="Foto de perfil"
+                    />
                   </MenuItem>
-                ))}
+                </a>
+              </Link>
             </MenuList>
           </React.Fragment>
         )}
