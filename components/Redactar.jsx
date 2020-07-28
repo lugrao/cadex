@@ -30,7 +30,7 @@ export default function Redactar(props) {
   }
 
   function publicar() {
-    if (contenido.contenido.length > 9) {
+    if (contenido.contenido.length > 4) {
       fetch(`/api/publicar/${props.urlSala}`, {
         method: "post",
         body: JSON.stringify(contenido),
