@@ -54,7 +54,7 @@ export default function Home() {
         <Nav
           sala="Principal"
           usuario={user}
-          cargando={loading}
+          cargandoUsuario={loading}
           salas={salas}
           salaURL={salaActiva.salaURL}
           salasEnInicio={salas.salasEnInicio}

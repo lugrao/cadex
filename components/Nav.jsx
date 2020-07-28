@@ -77,20 +77,33 @@ export default function Nav(props) {
                   </MenuItem>
                 </a>
               </Link>
-              <Link href={props.usuario ? "api/auth/logout" : "api/auth/login"}>
+              <Link
+                href={
+                  !props.cargandoUsuario && props.usuario
+                    ? "api/auth/logout"
+                    : "api/auth/login"
+                }
+              >
                 <a>
                   <MenuItem display="grid" gridTemplateColumns="1fr 1fr">
-                    <p>{[props.usuario ? "Logout" : "Login"]}</p>
+                    <p>
+                      {[
+                        !props.cargandoUsuario && props.usuario
+                          ? "Logout"
+                          : "Login",
+                      ]}
+                    </p>
                     <Image
                       justifySelf="end"
                       size="25px"
                       mr="15px"
                       rounded="full"
                       src={
-                        props.usuario ? props.usuario.picture : "/usuario.svg"
+                        !props.cargandoUsuario && props.usuario
+                          ? props.usuario.picture
+                          : "/usuario.svg"
                       }
                       objectFit="cover"
-                      alt="Foto de perfil"
                     />
                   </MenuItem>
                 </a>
@@ -100,45 +113,5 @@ export default function Nav(props) {
         )}
       </Menu>
     </Grid>
-  );
-}
-
-function NavVieja({ usuario, cargando }) {
-  return (
-    <nav id="navbar">
-      <h1>Cadex</h1>
-      <Link href="index">
-        <a>Inicio</a>
-      </Link>
-      {!cargando &&
-        (usuario ? (
-          <Link href="api/auth/logout">
-            <a>Logout</a>
-          </Link>
-        ) : (
-          <Link href="api/auth/login">
-            <a>Login</a>
-          </Link>
-        ))}
-      {usuario && (
-        <div className="usuario">
-          <p>{usuario.name}</p>
-          <img src={usuario.picture} />
-        </div>
-      )}
-      <style jsx>{`
-        .usuario {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-        }
-        .usuario p {
-          justify-self: right;
-          padding-right: 10px;
-        }
-        img {
-          width: 40px;
-        }
-      `}</style>
-    </nav>
   );
 }
