@@ -7,6 +7,7 @@ import useSwr from "swr";
 import _ from "lodash";
 import Router from "next/router";
 import {
+  Box,
   Text,
   Button,
   Grid,
@@ -15,6 +16,8 @@ import {
   FormErrorMessage,
   FormHelperText,
   Input,
+  Checkbox,
+  Heading,
 } from "@chakra-ui/core";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -46,7 +49,6 @@ export default function NuevaHistoria() {
       }
     });
   }
-
   function crearNuevaHistoria() {
     if (urlDeSala) {
       fetch(`${url}api/nueva-historia/`, {
@@ -57,10 +59,6 @@ export default function NuevaHistoria() {
     } else {
       return setUrlNoDisponible(true);
     }
-  }
-
-  function cambiarCheckbox() {
-    return setEnInicio(!enInicio);
   }
 
   if (error) return <h5>Ocurrió algún error.</h5>;
@@ -68,141 +66,61 @@ export default function NuevaHistoria() {
 
   return (
     <Layout>
-      <Nav sala="Nueva historia" />
+      <Nav />
       <Grid
-        maxW="30rem"
-        pt="5rem"
+        maxW="33rem"
+        p="5rem 10px"
         gridTemplateColumns="minmax(10rem, 30rem)"
         m="0 auto"
       >
-        <FormControl>
-          <FormLabel htmlFor="nombre-de-sala">Nombre de la sala:</FormLabel>
-          <Input
-            type="text"
-            id="nombre-de-sala"
-            value={nombreDeSala}
-            onChange={actualizarNombreDeSala}
-          />
-          <Text mt="20px">
-            La URL de tu sala será
-            <b>{` ${url}`}</b>
-            <b style={urlNoDisponible ? { color: "red" } : { color: "green" }}>
-              {urlDeSala}
-            </b>
-          </Text>
-          <Button mt={4} variantColor="yellow" type="submit">
-            Crear
-          </Button>
-        </FormControl>
-      </Grid>
-      {/* <Footer /> */}
-    </Layout>
-  );
-}
-
-function viejaNuevaHistoria() {
-  const [nombreDeSala, setNombreDeSala] = useState("");
-  const [urlDeSala, setUrlDeSala] = useState("");
-  const [urlNoDisponible, setUrlNoDisponible] = useState(false);
-  const [enInicio, setEnInicio] = useState(true);
-
-  const { data, error } = useSwr(`${url}api/historias`, fetcher);
-  if (error) return <SinData texto="Ocurrió algún error." error={error} />;
-  if (!data) return <SinData texto="Cargando..." />;
-
-  function actualizarNombreDeSala(event) {
-    const sala = event.target.value;
-    const urlDeSala = _.kebabCase(_.deburr(sala)).toLowerCase();
-    setNombreDeSala(sala);
-    setUrlDeSala(urlDeSala);
-    chequearUrl(urlDeSala);
-  }
-
-  function chequearUrl(urlDeUsuario) {
-    setUrlNoDisponible(false);
-    const urlsDeDb = data.URLsDeSalas;
-    urlsDeDb.forEach((url) => {
-      if (url === urlDeUsuario) {
-        return setUrlNoDisponible(true);
-      }
-    });
-  }
-
-  function crearNuevaHistoria() {
-    if (urlDeSala) {
-      fetch(`${url}api/nueva-historia/`, {
-        method: "post",
-        body: JSON.stringify({ sala: urlDeSala, enInicio: enInicio }),
-      });
-      Router.push(`/${urlDeSala}`);
-    } else {
-      return setUrlNoDisponible(true);
-    }
-  }
-
-  function cambiarCheckbox() {
-    return setEnInicio(!enInicio);
-  }
-
-  return (
-    <Layout>
-      <div id="app" className="container">
-        <Nav sala="Nueva historia" />
-        <div className="capitulo">
-          <h4>Empezá una nueva historia</h4>
-          <p>
-            Creá una <b>sala</b> y pasale el link a quien quieras.
-          </p>
-          <label>Nombre de la sala:</label>
-          <br />
-          <input
-            type="text"
-            value={nombreDeSala}
-            onChange={actualizarNombreDeSala}
-            className={
-              urlNoDisponible ? "form-control is-invalid" : "form-control"
-            }
-          ></input>
-          {urlNoDisponible && (
-            <div className="invalid-feedback">Nombre no disponible.</div>
-          )}
-          <br />
-
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="enInicio"
-              onChange={cambiarCheckbox}
-              checked={enInicio}
+        <Box p="40px" shadow="sm">
+          <Heading size="lg" m="20px 0 40px">
+            Crear nueva historia
+          </Heading>
+          <FormControl isInvalid={urlNoDisponible}>
+            <FormLabel htmlFor="nombre-de-sala">Nombre de la sala:</FormLabel>
+            <Input
+              type="text"
+              id="nombre-de-sala"
+              value={nombreDeSala}
+              onChange={actualizarNombreDeSala}
             />
-            <label class="custom-control-label" for="enInicio">
-              Mostrar sala en el Inicio
-            </label>
-          </div>
-          <br />
-
-          <p>
-            La URL de tu sala será{" "}
-            <b>
-              cadex.now.sh/
+            <FormErrorMessage position="absolute">
+              URL no disponible
+            </FormErrorMessage>
+            <Text mt="40px">
+              La URL de tu sala será
+              <b>{` ${url}`}</b>
               <b
                 style={urlNoDisponible ? { color: "red" } : { color: "green" }}
               >
                 {urlDeSala}
               </b>
-            </b>
-          </p>
-          <button
-            id="btn-crear-sala"
-            className="btn btn-warning"
-            onClick={!urlNoDisponible && crearNuevaHistoria}
-          >
-            Crear
-          </button>
-        </div>
-        <Footer />
-      </div>
+            </Text>
+            <Box mt="40px">
+              <Checkbox
+                variantColor="green"
+                defaultIsChecked={enInicio}
+                onChange={() => {
+                  setEnInicio(!enInicio);
+                }}
+              >
+                Mostrar sala en el Inicio
+              </Checkbox>
+            </Box>
+
+            <Button
+              mt="50px"
+              variantColor="yellow"
+              type="submit"
+              onClick={!urlNoDisponible ? crearNuevaHistoria : undefined}
+            >
+              Crear
+            </Button>
+          </FormControl>
+        </Box>
+      </Grid>
+      {/* <Footer /> */}
     </Layout>
   );
 }
