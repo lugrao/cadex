@@ -11,7 +11,7 @@ const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Historia(props) {
   const { data, error, revalidate } = useSwr(
-    `api/historia/${props.urlSala}`,
+    `api/sala/${props.salaUrl}`,
     fetcher,
     {
       refreshInterval: 1,
@@ -23,7 +23,7 @@ export default function Historia(props) {
   useEffect(() => {
     setHistoria(data);
     if (data) setIdHistoria(data._id);
-  });
+  }, [data]);
 
   if (error) return <p>Hubo algún error.</p>;
   if (!data)
@@ -54,7 +54,7 @@ export default function Historia(props) {
             />
           );
         })}
-      <Redactar urlSala={props.urlSala} usuario={props.usuario} />
+      <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
     </Grid>
   );
 }

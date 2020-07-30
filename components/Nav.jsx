@@ -1,4 +1,7 @@
 import Link from "next/link";
+import useSwr from "swr";
+import SinData from "./SinData";
+import Toast from "./Toast";
 
 import {
   Image,
@@ -11,9 +14,22 @@ import {
   MenuList,
   MenuItem,
   Select,
+  useToast,
 } from "@chakra-ui/core";
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 export default function Nav(props) {
+  const { data, error } =  useSwr(
+    props.enInicio ? `api/salas-en-inicio` : null,
+    fetcher
+  );
+  // const salasEnInicio = data.salasEnInicio;  
+  const toast = useToast();
+  
+
+  if (error) return <SinData texto="Ocurrió algún error." />;
+  if (!data) return <Grid pos="fixed" w="100%" h="3.5rem"></Grid>;
   return (
     <Grid
       zIndex={1}
@@ -38,22 +54,29 @@ export default function Nav(props) {
           <a>cadex</a>
         </Link>
       </Heading>
-      <Box justifySelf="center" w={["110px", "200px", "400px"]}>
-        <Select
-          size="sm"
-          onChange={props.cambiarHistoria}
-          value={props.salaURL}
-        >
-          {props.salasEnInicio &&
-            props.salasEnInicio.map((sala, index) => {
-              return (
-                <option key={index} value={sala.salaURL}>
-                  {sala.salaNombre}
-                </option>
-              );
-            })}
-        </Select>
-      </Box>
+
+      {!props.enInicio ? (
+        <Heading justifySelf="center" size="lg" color="white">
+          {props.salaNombre}
+        </Heading>
+      ) : (
+        <Box justifySelf="center" w={["110px", "200px", "400px"]}>
+          <Select
+            size="sm"
+            onChange={props.cambiarHistoria}
+            value={props.salaURL}
+          >
+            {data.salasEnInicio &&
+              data.salasEnInicio.map((sala, index) => {
+                return (
+                  <option key={index} value={sala.salaURL}>
+                    {sala.salaNombre}
+                  </option>
+                );
+              })}
+          </Select>
+        </Box>
+      )}
 
       <Menu>
         {({ isOpen }) => (
@@ -78,7 +101,7 @@ export default function Nav(props) {
                 </a>
               </Link>
 
-              <MenuItem>
+              <MenuItem onClick={()=>{toast(Toast.pronto)}}>
                 <p>Nueva historia</p>
               </MenuItem>
 

@@ -13,6 +13,13 @@ const Toast = {
     duration: 4000,
     isClosable: true,
   },
+  pronto: {
+    title: "Todavía no se inventó del todo esta parte",
+    description: "Esperemos que pronto.",
+    status: "warning",
+    duration: 5000,
+    isClosable: true,
+  }
 };
 
 export default Toast;

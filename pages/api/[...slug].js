@@ -13,13 +13,13 @@ handler.get(async (req, res) => {
   } = req;
 
   switch (slug[0]) {
-    case "historia":
+    case "sala":
       let historia = await req.db.collection("historias").findOne({
         salaURL: slug[1],
       });
       res.json(historia);
       break;
-    case "historias":
+    case "salas":
       let historias = await req.db
         .collection("historias")
         .findOne({ _id: ObjectId("5ebbfeabf739b325f0112064") });
