@@ -57,22 +57,24 @@ export default function Nav(props) {
       </Heading>
 
       {props.enInicio ? (
-        <Box justifySelf="center" w={["110px", "200px", "400px"]}>
-          <Select
-            size="sm"
-            onChange={props.cambiarHistoria}
-            value={props.salaURL}
-          >
-            {salasEnInicio &&
-              salasEnInicio.map((sala, index) => {
-                return (
-                  <option key={index} value={sala.salaURL}>
-                    {sala.salaNombre}
-                  </option>
-                );
-              })}
-          </Select>
-        </Box>
+        props.salaNombre !== "" && (
+          <Box justifySelf="center" w={["110px", "200px", "400px"]}>
+            <Select
+              size="sm"
+              onChange={props.cambiarHistoria}
+              value={props.salaURL}
+            >
+              {salasEnInicio &&
+                salasEnInicio.map((sala, index) => {
+                  return (
+                    <option key={index} value={sala.salaURL}>
+                      {sala.salaNombre}
+                    </option>
+                  );
+                })}
+            </Select>
+          </Box>
+        )
       ) : (
         <Heading
           justifySelf="center"

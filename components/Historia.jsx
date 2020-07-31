@@ -22,7 +22,6 @@ export default function Historia(props) {
     if (data) {
       setIdHistoria(data._id);
       props.actualizarSalaNombre(data.salaNombre);
-      console.log(data.salaNombre);
     }
   }, [data]);
 
