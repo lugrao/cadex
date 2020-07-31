@@ -1,9 +1,6 @@
 import Link from "next/link";
-import useSwr from "swr";
-import SinData from "./SinData";
 import Toast from "./Toast";
 import { useEffect, useState } from "react";
-
 import {
   Image,
   Heading,
@@ -50,6 +47,8 @@ export default function Nav(props) {
         color="yellow.50"
         bg="black"
         ml="15px"
+        mb="5px"
+        alignSelf="center"
         textShadow="3px 3px 1px #975A16"
       >
         <Link href="index">
@@ -57,11 +56,7 @@ export default function Nav(props) {
         </Link>
       </Heading>
 
-      {!props.enInicio ? (
-        <Heading justifySelf="center" size="lg" color="white">
-          {props.salaNombre}
-        </Heading>
-      ) : (
+      {props.enInicio ? (
         <Box justifySelf="center" w={["110px", "200px", "400px"]}>
           <Select
             size="sm"
@@ -78,6 +73,18 @@ export default function Nav(props) {
               })}
           </Select>
         </Box>
+      ) : (
+        <Heading
+          justifySelf="center"
+          textAlign="center"
+          fontSize={["13px", "17px", "20px"]}
+          w={["6rem", "12rem", "15rem", "23rem", "30rem"]}
+          mt={["2px", "6px", "5px"]}
+          color="white"
+          isTruncated={true}
+        >
+          {props.salaNombre}
+        </Heading>
       )}
 
       <Menu>

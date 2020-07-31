@@ -19,7 +19,10 @@ export default function Home({ sala }) {
   }, [sala]);
 
   function actualizarSalaNombre(nombre) {
-    setSalaActiva({ salaNombre: nombre });
+    setSalaActiva({
+      salaURL: salaActiva.salaURL,
+      salaNombre: nombre,
+    });
   }
 
   function actualizarSalaUrl(event) {
