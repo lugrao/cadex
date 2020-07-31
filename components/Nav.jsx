@@ -47,7 +47,7 @@ export default function Nav(props) {
         color="yellow.50"
         bg="black"
         ml="15px"
-        mb="5px"
+        mb="2px"
         alignSelf="center"
         textShadow="3px 3px 1px #975A16"
       >
@@ -77,8 +77,8 @@ export default function Nav(props) {
         <Heading
           justifySelf="center"
           textAlign="center"
-          fontSize={["13px", "17px", "20px"]}
-          w={["6rem", "12rem", "15rem", "23rem", "30rem"]}
+          fontSize={["15px", "17px", "20px"]}
+          w="100%"
           mt={["2px", "6px", "5px"]}
           color="white"
           isTruncated={true}
