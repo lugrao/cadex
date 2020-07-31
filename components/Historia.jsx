@@ -5,8 +5,6 @@ import Capitulo from "./Capitulo";
 import { Spinner, Grid } from "@chakra-ui/core";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-// const dev = process.env.NODE_ENV !== "production";
-// const url = dev ? "http://localhost:3000/" : "https://cadex.now.sh/";
 
 export default function Historia(props) {
   const { data, error, revalidate } = useSwr(
@@ -24,7 +22,7 @@ export default function Historia(props) {
     if (data) {
       setIdHistoria(data._id);
       props.actualizarSalaNombre(data.salaNombre);
-      console.log(data.salaNombre)
+      console.log(data.salaNombre);
     }
   }, [data]);
 
