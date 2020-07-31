@@ -2,6 +2,7 @@ import Link from "next/link";
 import useSwr from "swr";
 import SinData from "./SinData";
 import Toast from "./Toast";
+import { useEffect, useState } from "react";
 
 import {
   Image,
@@ -17,19 +18,20 @@ import {
   useToast,
 } from "@chakra-ui/core";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
 export default function Nav(props) {
-  const { data, error } =  useSwr(
-    props.enInicio ? `api/salas-en-inicio` : null,
-    fetcher
-  );
-  // const salasEnInicio = data.salasEnInicio;  
   const toast = useToast();
-  
+  const [salasEnInicio, setSalasEnInicio] = useState(false);
 
-  if (error) return <SinData texto="Ocurrió algún error." />;
-  if (!data) return <Grid pos="fixed" w="100%" h="3.5rem"></Grid>;
+  useEffect(() => {
+    if (props.enInicio) {
+      fetch("api/salas-en-inicio")
+        .then((res) => res.json())
+        .then((data) => {
+          setSalasEnInicio(data.salasEnInicio);
+        });
+    }
+  }, [props.enInicio]);
+
   return (
     <Grid
       zIndex={1}
@@ -66,8 +68,8 @@ export default function Nav(props) {
             onChange={props.cambiarHistoria}
             value={props.salaURL}
           >
-            {data.salasEnInicio &&
-              data.salasEnInicio.map((sala, index) => {
+            {salasEnInicio &&
+              salasEnInicio.map((sala, index) => {
                 return (
                   <option key={index} value={sala.salaURL}>
                     {sala.salaNombre}
@@ -101,7 +103,11 @@ export default function Nav(props) {
                 </a>
               </Link>
 
-              <MenuItem onClick={()=>{toast(Toast.pronto)}}>
+              <MenuItem
+                onClick={() => {
+                  toast(Toast.pronto);
+                }}
+              >
                 <p>Nueva historia</p>
               </MenuItem>
 

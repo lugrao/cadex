@@ -36,8 +36,7 @@
 //     <Layout>
 //       <div id="app" className="container">
 //         <Nav sala={data.salaNombre} />
-//         <div className="flecha-abajo">
-//           <a href={`#capitulo-${historia.length}`}>↓</a>
+//         <div className="flecha-abajo">actualizarSalaNombre
 //         </div>
 //         {historia.map((capitulo, index) => {
 //           return (

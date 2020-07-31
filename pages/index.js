@@ -6,18 +6,13 @@ import { useState, useEffect } from "react";
 import { useFetchUser } from "../lib/user";
 import { Grid } from "@chakra-ui/core";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
-
 export default function Home({ sala }) {
+  const enInicio = !sala;
   const { user, loading } = useFetchUser();
   const [salaActiva, setSalaActiva] = useState({
     salaURL: "prueba-3",
     salaNombre: "",
   });
-
-  const enInicio = !sala;
-  console.log("enInicio: " + enInicio);
 
   useEffect(() => {
     if (sala) setSalaActiva({ salaURL: sala });
