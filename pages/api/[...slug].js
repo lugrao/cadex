@@ -14,10 +14,15 @@ handler.get(async (req, res) => {
 
   switch (slug[0]) {
     case "sala":
-      let historia = await req.db.collection("historias").findOne({
-        salaURL: slug[1],
-      });
-      res.json(historia);
+      try {
+        let historia = await req.db.collection("historias").findOne({
+          salaURL: slug[1],
+        });
+        res.json(historia);
+      } catch (err) {
+        console.log(err)
+      }
+      
       break;
     case "salas":
       let historias = await req.db

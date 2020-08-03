@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Toast from "./Toast";
 import { useEffect, useState } from "react";
 import {
   Image,
@@ -12,11 +11,9 @@ import {
   MenuList,
   MenuItem,
   Select,
-  useToast,
 } from "@chakra-ui/core";
 
 export default function Nav(props) {
-  const toast = useToast();
   const [salasEnInicio, setSalasEnInicio] = useState(false);
 
   useEffect(() => {
@@ -28,7 +25,7 @@ export default function Nav(props) {
         });
     }
   }, [props.enInicio]);
-  console.log(props.nuevaHistoria);
+
   return (
     <Grid
       zIndex={1}

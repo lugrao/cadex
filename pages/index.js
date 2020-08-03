@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 import Historia from "../components/Historia";
 import { useState, useEffect } from "react";
 import { useFetchUser } from "../lib/user";
-import { Grid } from "@chakra-ui/core";
+import { Grid, Heading, Link } from "@chakra-ui/core";
 
-export default function Home({ sala }) {
+export default function Inicio({ sala }) {
   const enInicio = !sala;
   const { user, loading } = useFetchUser();
   const [salaActiva, setSalaActiva] = useState({
@@ -50,8 +50,17 @@ export default function Home({ sala }) {
           salaUrl={salaActiva.salaURL}
           usuario={user}
         />
-
-        <Footer />
+        {!salaActiva.salaNombre && (
+          <Heading size="sm">
+            Esta sala no existe, pero podés
+            <Link href="NuevaHistoria" color="yellow.600">
+              {" "}
+              crearla
+            </Link>
+            .
+          </Heading>
+        )}
+        {/* <Footer /> */}
       </Grid>
     </Layout>
   );
