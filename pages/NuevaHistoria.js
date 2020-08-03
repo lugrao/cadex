@@ -30,7 +30,7 @@ export default function NuevaHistoria() {
   const [urlDeSala, setUrlDeSala] = useState("");
   const [urlNoDisponible, setUrlNoDisponible] = useState(false);
   const [enInicio, setEnInicio] = useState(true);
-  const { data, error } = useSwr(`${url}api/historias`, fetcher);
+  const { data, error } = useSwr(`api/salas`, fetcher);
 
   function actualizarNombreDeSala(event) {
     const sala = event.target.value;
@@ -49,11 +49,16 @@ export default function NuevaHistoria() {
       }
     });
   }
+
   function crearNuevaHistoria() {
     if (urlDeSala) {
-      fetch(`${url}api/nueva-historia/`, {
+      fetch(`api/nueva-historia/`, {
         method: "post",
-        body: JSON.stringify({ sala: urlDeSala, enInicio: enInicio }),
+        body: JSON.stringify({
+          salaNombre: nombreDeSala,
+          salaURL: urlDeSala,
+          enInicio: enInicio,
+        }),
       });
       Router.push(`/${urlDeSala}`);
     } else {
@@ -90,7 +95,7 @@ export default function NuevaHistoria() {
             </FormErrorMessage>
             <Text mt="40px">
               La URL de tu sala será
-              <b>{` ${url}`}</b>
+              <b>{` https://cadex-2.vercel.app/`}</b>
               <b
                 style={urlNoDisponible ? { color: "red" } : { color: "green" }}
               >
