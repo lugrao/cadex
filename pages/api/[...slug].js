@@ -62,8 +62,6 @@ handler.post(async (req, res) => {
     case "nueva-historia":
       let salaNombre = data.salaNombre;
       let salaURL = data.salaURL;
-      // let salaURL = _.kebabCase(_.deburr(salaNombre));
-      // salaURL = salaURL.toLowerCase();
       await req.db.collection("historias").insertOne({
         salaNombre: salaNombre,
         salaURL: salaURL,

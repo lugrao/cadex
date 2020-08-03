@@ -20,9 +20,6 @@ import {
   Heading,
 } from "@chakra-ui/core";
 
-const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000/" : "https://cadex-2.vercel.app/";
-
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function NuevaHistoria() {
@@ -71,7 +68,7 @@ export default function NuevaHistoria() {
 
   return (
     <Layout>
-      <Nav />
+      <Nav nuevaHistoria={true}/>
       <Grid
         maxW="33rem"
         p="5rem 10px"

@@ -28,7 +28,7 @@ export default function Nav(props) {
         });
     }
   }, [props.enInicio]);
-
+  console.log(props.nuevaHistoria);
   return (
     <Grid
       zIndex={1}
@@ -111,14 +111,15 @@ export default function Nav(props) {
                   </MenuItem>
                 </a>
               </Link>
-
-              <MenuItem
-                onClick={() => {
-                  toast(Toast.pronto);
-                }}
-              >
-                <p>Nueva historia</p>
-              </MenuItem>
+              {!props.nuevaHistoria && (
+                <Link href="NuevaHistoria">
+                  <a>
+                    <MenuItem>
+                      <p>Nueva historia</p>
+                    </MenuItem>
+                  </a>
+                </Link>
+              )}
 
               <Link
                 href={
