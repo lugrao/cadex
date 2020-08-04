@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Spinner, Grid } from "@chakra-ui/core";
+import {
+  Alert,
+  AlertIcon,
+  Spinner,
+  Grid,
+  useToast,
+} from "@chakra-ui/core";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Historia(props) {
+  const toast = useToast();
   const { data, error, revalidate } = useSwr(
     `api/sala/${props.salaUrl}`,
     fetcher,
@@ -23,6 +30,20 @@ export default function Historia(props) {
       setIdHistoria(data._id);
       props.actualizarSalaNombre(data.salaNombre);
     }
+  }, [data]);
+
+  useEffect(() => {
+    if (data && !props.usuario)
+      toast({
+        position: "bottom-left",
+        render: () => (
+          <Alert status="info">
+            <AlertIcon />
+            Logueate para editar o eliminar los capítulos que escribiste.
+          </Alert>
+        ),
+        duration: 3500,
+      });
   }, [data]);
 
   if (error) return <p>Hubo algún error.</p>;

@@ -19,7 +19,7 @@ const Toast = {
     status: "warning",
     duration: 5000,
     isClosable: true,
-  }
+  },
 };
 
 export default Toast;

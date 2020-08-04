@@ -74,7 +74,7 @@ export default function Capitulo(props) {
         <Text mt={4} lineHeight="1.5" whiteSpace="pre-wrap">
           {props.contenido}
         </Text>
-
+        
         {props.usuario && props.usuario.sub === props.idUsuario && (
           <ButtonGroup
             display="flex"
