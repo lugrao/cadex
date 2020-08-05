@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import {
-  Alert,
-  AlertIcon,
-  Spinner,
-  Grid,
-  useToast,
-} from "@chakra-ui/core";
+import { Alert, AlertIcon, Spinner, Grid, useToast } from "@chakra-ui/core";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -30,9 +24,7 @@ export default function Historia(props) {
       setIdHistoria(data._id);
       props.actualizarSalaNombre(data.salaNombre);
     }
-  }, [data]);
 
-  useEffect(() => {
     if (data && !props.usuario)
       toast({
         position: "bottom-left",
