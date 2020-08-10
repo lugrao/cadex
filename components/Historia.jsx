@@ -2,8 +2,15 @@ import { useEffect, useState } from "react";
 import useSwr from "swr";
 import Redactar from "./Redactar";
 import Capitulo from "./Capitulo";
-import { Alert, AlertIcon, Spinner, Grid, useToast } from "@chakra-ui/core";
-
+import {
+  Alert,
+  AlertIcon,
+  Heading,
+  Link,
+  Spinner,
+  Grid,
+  useToast,
+} from "@chakra-ui/core";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Historia(props) {
@@ -53,21 +60,35 @@ export default function Historia(props) {
     );
   return (
     <Grid maxW="30rem" mt="4rem" gridTemplateColumns="minmax(10rem, 30rem)">
-      {historia &&
-        historia.historia.map((capitulo, index) => {
-          return (
-            <Capitulo
-              key={index}
-              idCapitulo={capitulo._id}
-              idHistoria={idHistoria}
-              titulo={index}
-              contenido={capitulo.contenido}
-              idUsuario={capitulo.idUsuario}
-              usuario={props.usuario}
-            />
-          );
-        })}
-      <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
+      {!props.existeSala && !props.enInicio && (
+        <Heading size="sm" mt="4rem" justifySelf="center">
+          Esta sala no existe, pero podés
+          <Link href="NuevaHistoria" color="yellow.600">
+            {" "}
+            crearla
+          </Link>
+          .
+        </Heading>
+      )}
+
+      {props.salaNombre !== null && historia && (
+        <>
+          {historia.historia.map((capitulo, index) => {
+            return (
+              <Capitulo
+                key={index}
+                idCapitulo={capitulo._id}
+                idHistoria={idHistoria}
+                titulo={index}
+                contenido={capitulo.contenido}
+                idUsuario={capitulo.idUsuario}
+                usuario={props.usuario}
+              />
+            );
+          })}
+          <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
+        </>
+      )}
     </Grid>
   );
 }

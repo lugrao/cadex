@@ -6,17 +6,18 @@ import { useState, useEffect } from "react";
 import { useFetchUser } from "../lib/user";
 import { Grid, Heading, Link } from "@chakra-ui/core";
 
-export default function Inicio({ sala }) {
+export default function Inicio({ sala, existeSala }) {
   const enInicio = !sala;
   const { user, loading } = useFetchUser();
   const [salaActiva, setSalaActiva] = useState({
     salaURL: "prueba-3",
-    salaNombre: "",
+    salaNombre: null,
   });
 
   useEffect(() => {
-    if (sala) setSalaActiva({ salaURL: sala });
+    if (sala) setSalaActiva({ salaURL: sala, salaNombre: null });
   }, [sala]);
+
 
   function actualizarSalaNombre(nombre) {
     setSalaActiva({
@@ -28,6 +29,7 @@ export default function Inicio({ sala }) {
   function actualizarSalaUrl(event) {
     setSalaActiva({
       salaURL: event.target.value,
+      salaNombre: null,
     });
   }
 
@@ -36,26 +38,28 @@ export default function Inicio({ sala }) {
       <Grid gap={20} justifyContent="center">
         <Nav
           enInicio={enInicio}
+          existeSala={existeSala}
           salaNombre={salaActiva.salaNombre}
           salaURL={salaActiva.salaURL}
-          cambiarHistoria={actualizarSalaUrl}
           usuario={user}
           cargandoUsuario={loading}
+          cambiarHistoria={actualizarSalaUrl}
         />
         <Historia
-          enSala={sala}
-          key={1}
-          actualizarSalaNombre={actualizarSalaNombre}
+          enInicio={enInicio}
+          existeSala={existeSala}
           salaNombre={salaActiva.salaNombre}
           salaUrl={salaActiva.salaURL}
           usuario={user}
+          actualizarSalaNombre={actualizarSalaNombre}
         />
-        {!salaActiva.salaNombre && (
+        {!salaActiva.salaNombre && !enInicio && (
           <Heading size="sm">
             Esta sala no existe, pero podés
             <Link href="NuevaHistoria" color="yellow.600">
               {" "}
               crearla
+              {salaActiva.salaNombre}
             </Link>
             .
           </Heading>

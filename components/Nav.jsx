@@ -52,10 +52,9 @@ export default function Nav(props) {
           <a>cadex</a>
         </Link>
       </Heading>
-
       {props.enInicio ? (
         <Box justifySelf="center" w={["110px", "200px", "400px"]}>
-          {props.salaNombre !== "" && (
+          {props.salaNombre !== null && (
             <Select
               size="sm"
               onChange={props.cambiarHistoria}
