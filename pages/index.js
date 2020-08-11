@@ -49,6 +49,7 @@ export default function Inicio({ sala, existeSala }) {
           cargandoUsuario={loading}
           cambiarHistoria={actualizarSalaUrl}
         />
+        {(existeSala || enInicio) && 
         <Historia
           enInicio={enInicio}
           existeSala={existeSala}
@@ -58,7 +59,7 @@ export default function Inicio({ sala, existeSala }) {
           actualizarSalaNombre={actualizarSalaNombre}
           actualizarMensajeDeLogin={actualizarMensajeDeLogin}
           mensajeDeLoginEnviado={mensajeDeLoginEnviado}
-        />
+        />}
         {!existeSala && !enInicio && (
           <Heading size="sm">
             Esta sala no existe, pero podés
