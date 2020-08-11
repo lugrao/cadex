@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import Inicio from "./index";
 import useSwr from "swr";
 import { useEffect, useState } from "react";
-import { Spinner } from "@chakra-ui/core";
+import { Grid, Spinner } from "@chakra-ui/core";
 import Layout from "../components/Layout";
+import Nav from "../components/Nav";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -34,15 +35,18 @@ export default function Sala() {
   if (!data)
     return (
       <Layout>
-        <Spinner
-          display="grid"
-          thickness="4px"
-          speed="0.25s"
-          emptyColor="gray.200"
-          color="yellow.400"
-          size="xl"
-          margin="7rem auto 30rem"
-        />
+        <Grid gap={20} justifyContent="center">
+          <Nav />
+          <Spinner
+            display="grid"
+            thickness="4px"
+            speed="0.25s"
+            emptyColor="gray.200"
+            color="yellow.400"
+            size="xl"
+            margin="7rem auto 30rem"
+          />
+        </Grid>
       </Layout>
     );
 
