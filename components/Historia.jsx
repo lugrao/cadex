@@ -14,11 +14,6 @@ import {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Historia(props) {
-  console.log(props.existeSala);
-  console.log(props.enInicio);
-  // console.log(data);
-  ///no hay data cuando !props.existeSala y !props.enInicio
-
   const toast = useToast();
   const { data, error, revalidate } = useSwr(
     `api/sala/${props.salaUrl}`,

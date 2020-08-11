@@ -33,7 +33,7 @@ export default function Inicio({ sala, existeSala }) {
   function actualizarSalaUrl(event) {
     setSalaActiva({
       salaURL: event.target.value,
-      salaNombre: null,
+      salaNombre: false,
     });
   }
 

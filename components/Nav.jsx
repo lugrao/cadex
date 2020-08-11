@@ -54,7 +54,7 @@ export default function Nav(props) {
       </Heading>
       {props.enInicio ? (
         <Box justifySelf="center" w={["110px", "200px", "400px"]}>
-          {props.salaNombre !== null && (
+          {props.salaNombre !== null && props.enInicio && (
             <Select
               size="sm"
               onChange={props.cambiarHistoria}
