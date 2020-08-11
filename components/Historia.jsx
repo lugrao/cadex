@@ -14,6 +14,11 @@ import {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Historia(props) {
+  console.log(props.existeSala);
+  console.log(props.enInicio);
+  // console.log(data);
+  ///no hay data cuando !props.existeSala y !props.enInicio
+
   const toast = useToast();
   const { data, error, revalidate } = useSwr(
     `api/sala/${props.salaUrl}`,
@@ -57,22 +62,12 @@ export default function Historia(props) {
         emptyColor="gray.200"
         color="yellow.400"
         size="xl"
-        margin="7rem auto 30rem"
+        // margin="7rem auto 30rem"
+        margin="7rem auto 1rem"
       />
     );
   return (
     <Grid maxW="30rem" mt="4rem" gridTemplateColumns="minmax(10rem, 30rem)">
-      {!props.existeSala && !props.enInicio && (
-        <Heading size="sm" mt="4rem" justifySelf="center">
-          Esta sala no existe, pero podés
-          <Link href="NuevaHistoria" color="yellow.600">
-            {" "}
-            crearla
-          </Link>
-          .
-        </Heading>
-      )}
-
       {props.salaNombre !== null && historia && (
         <>
           {historia.historia.map((capitulo, index) => {

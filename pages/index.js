@@ -59,7 +59,7 @@ export default function Inicio({ sala, existeSala }) {
           actualizarMensajeDeLogin={actualizarMensajeDeLogin}
           mensajeDeLoginEnviado={mensajeDeLoginEnviado}
         />
-        {!salaActiva.salaNombre && !enInicio && (
+        {!existeSala && !enInicio && (
           <Heading size="sm">
             Esta sala no existe, pero podés
             <Link href="NuevaHistoria" color="yellow.600">
