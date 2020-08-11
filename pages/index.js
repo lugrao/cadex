@@ -61,7 +61,7 @@ export default function Inicio({ sala, existeSala }) {
           mensajeDeLoginEnviado={mensajeDeLoginEnviado}
         />}
         {!existeSala && !enInicio && (
-          <Heading size="sm">
+          <Heading size="sm" mt="7rem">
             Esta sala no existe, pero podés
             <Link href="NuevaHistoria" color="yellow.600">
               {" "}
