@@ -32,7 +32,7 @@ export default function Historia(props) {
       props.actualizarSalaNombre(data.salaNombre);
     }
 
-    if (data && !props.usuario)
+    if (data && !props.usuario && !props.mensajeDeLoginEnviado) {
       toast({
         position: "bottom-left",
         render: () => (
@@ -41,8 +41,10 @@ export default function Historia(props) {
             Logueate para editar o eliminar los capítulos que escribiste.
           </Alert>
         ),
-        duration: 3500,
+        duration: 4500,
       });
+      props.actualizarMensajeDeLogin();
+    }
   }, [data]);
 
   if (error) return <p>Hubo algún error.</p>;

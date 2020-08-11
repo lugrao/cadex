@@ -9,6 +9,7 @@ import { Grid, Heading, Link } from "@chakra-ui/core";
 export default function Inicio({ sala, existeSala }) {
   const enInicio = !sala;
   const { user, loading } = useFetchUser();
+  const [mensajeDeLoginEnviado, setMensajeDeLoginEnviado] = useState(false);
   const [salaActiva, setSalaActiva] = useState({
     salaURL: "prueba-3",
     salaNombre: null,
@@ -18,6 +19,9 @@ export default function Inicio({ sala, existeSala }) {
     if (sala) setSalaActiva({ salaURL: sala, salaNombre: null });
   }, [sala]);
 
+  function actualizarMensajeDeLogin() {
+    setMensajeDeLoginEnviado(true);
+  }
 
   function actualizarSalaNombre(nombre) {
     setSalaActiva({
@@ -52,6 +56,8 @@ export default function Inicio({ sala, existeSala }) {
           salaUrl={salaActiva.salaURL}
           usuario={user}
           actualizarSalaNombre={actualizarSalaNombre}
+          actualizarMensajeDeLogin={actualizarMensajeDeLogin}
+          mensajeDeLoginEnviado={mensajeDeLoginEnviado}
         />
         {!salaActiva.salaNombre && !enInicio && (
           <Heading size="sm">
