@@ -75,6 +75,7 @@ export default function Historia(props) {
                 contenido={capitulo.contenido}
                 idUsuario={capitulo.idUsuario}
                 usuario={props.usuario}
+                scrollear={props.scrollear}
               />
             );
           })}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Toast from "./Toast";
 import {
   Box,
@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/core";
 
 export default function Capitulo(props) {
+  const ultimoCapituloRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
@@ -34,6 +35,16 @@ export default function Capitulo(props) {
       }, 2000);
     }
   }, [pocosCaracteres]);
+
+  useEffect(() => {
+    //if props.scrolear === true > scrollearHaciaUltimoCapitulo()
+    //,[props.scrollear]
+    if (props.scrollear) scrollearHaciaUltimoCapitulo();
+  }, [props.scrollear]);
+
+  function scrollearHaciaUltimoCapitulo() {
+    ultimoCapituloRef.current.scrollIntoView({ behaviour: "smooth" });
+  }
 
   function eliminar() {
     const capitulo = {
@@ -66,7 +77,7 @@ export default function Capitulo(props) {
 
   return (
     <>
-      <Box m="10px 10px" p={5} shadow="sm">
+      <Box m="10px 10px" p={5} shadow="sm" ref={ultimoCapituloRef}>
         <Heading fontSize="xs" color="#cccccc" mb="20px">
           {props.titulo}
         </Heading>
@@ -74,7 +85,7 @@ export default function Capitulo(props) {
         <Text mt={4} lineHeight="1.5" whiteSpace="pre-wrap">
           {props.contenido}
         </Text>
-        
+
         {props.usuario && props.usuario.sub === props.idUsuario && (
           <ButtonGroup
             display="flex"
