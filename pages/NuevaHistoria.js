@@ -1,6 +1,5 @@
 import Layout from "../components/Layout"
 import Nav from "../components/Nav"
-import Footer from "../components/Footer"
 import SinData from "../components/SinData"
 import { useState } from "react"
 import useSwr from "swr"
@@ -121,7 +120,6 @@ export default function NuevaHistoria() {
           </FormControl>
         </Box>
       </Grid>
-      {/* <Footer /> */}
     </Layout>
   )
 }
