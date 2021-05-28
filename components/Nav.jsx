@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import Link from "next/link"
+import { useEffect, useState } from "react"
 import {
   Image,
   Heading,
@@ -11,20 +11,20 @@ import {
   MenuList,
   MenuItem,
   Select,
-} from "@chakra-ui/core";
+} from "@chakra-ui/core"
 
 export default function Nav(props) {
-  const [salasEnInicio, setSalasEnInicio] = useState(false);
+  const [salasEnInicio, setSalasEnInicio] = useState(false)
 
   useEffect(() => {
     if (props.enInicio) {
       fetch("api/salas-en-inicio")
         .then((res) => res.json())
         .then((data) => {
-          setSalasEnInicio(data.salasEnInicio);
-        });
+          setSalasEnInicio(data.salasEnInicio)
+        })
     }
-  }, [props.enInicio]);
+  }, [props.enInicio])
 
   return (
     <Grid
@@ -66,7 +66,7 @@ export default function Nav(props) {
                     <option key={index} value={sala.salaURL}>
                       {sala.salaNombre}
                     </option>
-                  );
+                  )
                 })}
             </Select>
           )}
@@ -153,5 +153,5 @@ export default function Nav(props) {
         )}
       </Menu>
     </Grid>
-  );
+  )
 }

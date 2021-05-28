@@ -1,7 +1,7 @@
-import Layout from "./Layout";
-import Nav from "./Nav";
-import { Grid, Spinner } from "@chakra-ui/core";
-import Footer from "./Footer";
+import Layout from "./Layout"
+import Nav from "./Nav"
+import { Grid, Spinner } from "@chakra-ui/core"
+import Footer from "./Footer"
 
 export default function PaginaSinData() {
   return (
@@ -19,5 +19,5 @@ export default function PaginaSinData() {
         />
       </Grid>
     </Layout>
-  );
+  )
 }

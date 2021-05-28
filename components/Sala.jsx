@@ -1,10 +1,10 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"
+import Link from "next/link"
 
 export default function Sala(props) {
-  const [desplegada, setDesplegada] = useState(false);
+  const [desplegada, setDesplegada] = useState(false)
   function desplegarSala() {
-    desplegada ? setDesplegada(false) : setDesplegada(true);
+    desplegada ? setDesplegada(false) : setDesplegada(true)
   }
   return (
     <div>
@@ -18,7 +18,7 @@ export default function Sala(props) {
                   <p>{capitulo.contenido}</p>
                 </div>
               )
-            );
+            )
           })}
           <p>
             <Link href={props.urlSala}>
@@ -28,5 +28,5 @@ export default function Sala(props) {
         </div>
       )}
     </div>
-  );
+  )
 }

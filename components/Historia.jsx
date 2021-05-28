@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import useSwr from "swr";
-import Redactar from "./Redactar";
-import Capitulo from "./Capitulo";
+import { useEffect, useState } from "react"
+import useSwr from "swr"
+import Redactar from "./Redactar"
+import Capitulo from "./Capitulo"
 import {
   Alert,
   AlertIcon,
@@ -10,26 +10,26 @@ import {
   Spinner,
   Grid,
   useToast,
-} from "@chakra-ui/core";
-const fetcher = (url) => fetch(url).then((res) => res.json());
+} from "@chakra-ui/core"
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Historia(props) {
-  const toast = useToast();
+  const toast = useToast()
   const { data, error, revalidate } = useSwr(
     `api/sala/${props.salaUrl}`,
     fetcher,
     {
       refreshInterval: 1,
     }
-  );
-  const [historia, setHistoria] = useState(data);
-  const [idHistoria, setIdHistoria] = useState("");
+  )
+  const [historia, setHistoria] = useState(data)
+  const [idHistoria, setIdHistoria] = useState("")
 
   useEffect(() => {
-    setHistoria(data);
+    setHistoria(data)
     if (data) {
-      setIdHistoria(data._id);
-      props.actualizarSalaNombre(data.salaNombre);
+      setIdHistoria(data._id)
+      props.actualizarSalaNombre(data.salaNombre)
     }
 
     if (data && !props.usuario && !props.mensajeDeLoginEnviado) {
@@ -42,12 +42,12 @@ export default function Historia(props) {
           </Alert>
         ),
         duration: 4500,
-      });
-      props.actualizarMensajeDeLogin();
+      })
+      props.actualizarMensajeDeLogin()
     }
-  }, [data]);
+  }, [data])
 
-  if (error) return <p>Hubo algún error.</p>;
+  if (error) return <p>Hubo algún error.</p>
   if (!data)
     return (
       <Spinner
@@ -60,7 +60,7 @@ export default function Historia(props) {
         // margin="7rem auto 30rem"
         margin="7rem auto 1rem"
       />
-    );
+    )
   return (
     <Grid maxW="30rem" mt="4rem" gridTemplateColumns="minmax(10rem, 30rem)">
       {props.salaNombre !== null && historia && (
@@ -77,11 +77,11 @@ export default function Historia(props) {
                 usuario={props.usuario}
                 scrollear={props.scrollear}
               />
-            );
+            )
           })}
           <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
         </>
       )}
     </Grid>
-  );
+  )
 }

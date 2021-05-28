@@ -1,5 +1,5 @@
-import Head from "next/head";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import Head from "next/head"
+import { ThemeProvider, CSSReset } from "@chakra-ui/core"
 
 export default function Layout({ children }) {
   return (
@@ -14,5 +14,5 @@ export default function Layout({ children }) {
       <CSSReset />
       <main id="main">{children}</main>
     </ThemeProvider>
-  );
+  )
 }

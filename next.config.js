@@ -11,4 +11,4 @@ module.exports = {
     SESSION_COOKIE_SECRET: process.env.SESSION_COOKIE_SECRET,
     SESSION_COOKIE_LIFETIME: 7200, // 2 hours
   },
-};
+}

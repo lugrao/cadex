@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/core";
+import { Text } from "@chakra-ui/core"
 
 export default function Footer() {
   return (
@@ -7,5 +7,5 @@ export default function Footer() {
         Copybottom 2020.
       </Text>
     </footer>
-  );
+  )
 }

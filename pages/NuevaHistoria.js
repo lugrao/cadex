@@ -1,11 +1,11 @@
-import Layout from "../components/Layout";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
-import SinData from "../components/SinData";
-import { useState } from "react";
-import useSwr from "swr";
-import _ from "lodash";
-import Router from "next/router";
+import Layout from "../components/Layout"
+import Nav from "../components/Nav"
+import Footer from "../components/Footer"
+import SinData from "../components/SinData"
+import { useState } from "react"
+import useSwr from "swr"
+import _ from "lodash"
+import Router from "next/router"
 import {
   Box,
   Text,
@@ -17,33 +17,33 @@ import {
   Input,
   Checkbox,
   Heading,
-} from "@chakra-ui/core";
+} from "@chakra-ui/core"
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function NuevaHistoria() {
-  const [nombreDeSala, setNombreDeSala] = useState("");
-  const [urlDeSala, setUrlDeSala] = useState("");
-  const [urlNoDisponible, setUrlNoDisponible] = useState(false);
-  const [enInicio, setEnInicio] = useState(true);
-  const { data, error } = useSwr(`api/salas`, fetcher);
+  const [nombreDeSala, setNombreDeSala] = useState("")
+  const [urlDeSala, setUrlDeSala] = useState("")
+  const [urlNoDisponible, setUrlNoDisponible] = useState(false)
+  const [enInicio, setEnInicio] = useState(true)
+  const { data, error } = useSwr(`api/salas`, fetcher)
 
   function actualizarNombreDeSala(event) {
-    const sala = event.target.value;
-    const urlDeSala = _.kebabCase(_.deburr(sala)).toLowerCase();
-    setNombreDeSala(sala);
-    setUrlDeSala(urlDeSala);
-    chequearUrl(urlDeSala);
+    const sala = event.target.value
+    const urlDeSala = _.kebabCase(_.deburr(sala)).toLowerCase()
+    setNombreDeSala(sala)
+    setUrlDeSala(urlDeSala)
+    chequearUrl(urlDeSala)
   }
 
   function chequearUrl(urlDeUsuario) {
-    setUrlNoDisponible(false);
-    const urlsDeDb = data.URLsDeSalas;
+    setUrlNoDisponible(false)
+    const urlsDeDb = data.URLsDeSalas
     urlsDeDb.forEach((url) => {
       if (url === urlDeUsuario) {
-        return setUrlNoDisponible(true);
+        return setUrlNoDisponible(true)
       }
-    });
+    })
   }
 
   function crearNuevaHistoria() {
@@ -55,19 +55,19 @@ export default function NuevaHistoria() {
           salaURL: urlDeSala,
           enInicio: enInicio,
         }),
-      });
-      Router.push(`/${urlDeSala}`);
+      })
+      Router.push(`/${urlDeSala}`)
     } else {
-      return setUrlNoDisponible(true);
+      return setUrlNoDisponible(true)
     }
   }
 
-  if (error) return <h5>Ocurrió algún error.</h5>;
-  if (!data) return <SinData />;
+  if (error) return <h5>Ocurrió algún error.</h5>
+  if (!data) return <SinData />
 
   return (
     <Layout>
-      <Nav nuevaHistoria={true}/>
+      <Nav nuevaHistoria={true} />
       <Grid
         maxW="33rem"
         p="5rem 10px"
@@ -103,7 +103,7 @@ export default function NuevaHistoria() {
                 variantColor="green"
                 defaultIsChecked={enInicio}
                 onChange={() => {
-                  setEnInicio(!enInicio);
+                  setEnInicio(!enInicio)
                 }}
               >
                 Mostrar sala en el Inicio
@@ -123,5 +123,5 @@ export default function NuevaHistoria() {
       </Grid>
       {/* <Footer /> */}
     </Layout>
-  );
+  )
 }

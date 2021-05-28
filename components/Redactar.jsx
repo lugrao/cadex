@@ -1,32 +1,31 @@
-import { useState, useEffect } from "react";
-import Toast from "./Toast";
-import { Textarea, Box, Button, useToast } from "@chakra-ui/core";
+import { useState, useEffect } from "react"
+import Toast from "./Toast"
+import { Textarea, Box, Button, useToast } from "@chakra-ui/core"
 
 export default function Redactar(props) {
-  const toast = useToast();
-  const [contenido, setContenido] = useState({ contenido: "", idUsuario: "" });
-  const [textAreaValue, setTextAreaValue] = useState("");
-  const [pocosCaracteres, setPocosCaracteres] = useState(false);
+  const toast = useToast()
+  const [contenido, setContenido] = useState({ contenido: "", idUsuario: "" })
+  const [textAreaValue, setTextAreaValue] = useState("")
+  const [pocosCaracteres, setPocosCaracteres] = useState(false)
 
   useEffect(() => {
     if (pocosCaracteres) {
-      toast(Toast.pocosCaracteres);
+      toast(Toast.pocosCaracteres)
       setTimeout(() => {
-        setPocosCaracteres(false);
-      }, 2000);
+        setPocosCaracteres(false)
+      }, 2000)
     }
-  }, [pocosCaracteres]);
+  }, [pocosCaracteres])
 
   function actualizarContenido(event) {
-    const texto = event.target.value;
+    const texto = event.target.value
     setContenido({
       contenido: texto,
       idUsuario: props.usuario ? props.usuario.sub : "",
-    });
-    setTextAreaValue(event.target.value);
-    if (pocosCaracteres) setPocosCaracteres(false);
-    if (texto.length === 400)
-      toast(Toast.muchosCaracteres);
+    })
+    setTextAreaValue(event.target.value)
+    if (pocosCaracteres) setPocosCaracteres(false)
+    if (texto.length === 400) toast(Toast.muchosCaracteres)
   }
 
   function publicar() {
@@ -34,10 +33,10 @@ export default function Redactar(props) {
       fetch(`/api/publicar/${props.urlSala}`, {
         method: "post",
         body: JSON.stringify(contenido),
-      });
-      setTextAreaValue("");
+      })
+      setTextAreaValue("")
     } else {
-      setPocosCaracteres(true);
+      setPocosCaracteres(true)
     }
   }
 
@@ -75,5 +74,5 @@ export default function Redactar(props) {
         </Button>
       </Box>
     </>
-  );
+  )
 }

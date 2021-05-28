@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import Toast from "./Toast";
+import { useState, useEffect, useRef } from "react"
+import Toast from "./Toast"
 import {
   Box,
   Heading,
@@ -17,45 +17,45 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
-} from "@chakra-ui/core";
+} from "@chakra-ui/core"
 
 export default function Capitulo(props) {
-  const ultimoCapituloRef = useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
+  const ultimoCapituloRef = useRef(null)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const toast = useToast()
 
-  const [textoEditable, setTextoEditable] = useState(props.contenido);
-  const [pocosCaracteres, setPocosCaracteres] = useState(false);
+  const [textoEditable, setTextoEditable] = useState(props.contenido)
+  const [pocosCaracteres, setPocosCaracteres] = useState(false)
 
   useEffect(() => {
     if (pocosCaracteres) {
-      toast(Toast.pocosCaracteres);
+      toast(Toast.pocosCaracteres)
       setTimeout(() => {
-        setPocosCaracteres(false);
-      }, 2000);
+        setPocosCaracteres(false)
+      }, 2000)
     }
-  }, [pocosCaracteres]);
+  }, [pocosCaracteres])
 
   useEffect(() => {
     //if props.scrolear === true > scrollearHaciaUltimoCapitulo()
     //,[props.scrollear]
-    if (props.scrollear) scrollearHaciaUltimoCapitulo();
-  }, [props.scrollear]);
+    if (props.scrollear) scrollearHaciaUltimoCapitulo()
+  }, [props.scrollear])
 
   function scrollearHaciaUltimoCapitulo() {
-    ultimoCapituloRef.current.scrollIntoView({ behaviour: "smooth" });
+    ultimoCapituloRef.current.scrollIntoView({ behaviour: "smooth" })
   }
 
   function eliminar() {
     const capitulo = {
       idHistoria: props.idHistoria,
       idCapitulo: props.idCapitulo,
-    };
+    }
 
     fetch(`/api/eliminar-capitulo/`, {
       method: "post",
       body: JSON.stringify(capitulo),
-    });
+    })
   }
 
   function actualizarCapitulo() {
@@ -63,15 +63,15 @@ export default function Capitulo(props) {
       idHistoria: props.idHistoria,
       idCapitulo: props.idCapitulo,
       contenido: textoEditable,
-    };
+    }
     if (capitulo.contenido.length > 4) {
       fetch(`/api/editar-capitulo`, {
         method: "post",
         body: JSON.stringify(capitulo),
-      });
-      onClose();
+      })
+      onClose()
     } else {
-      setPocosCaracteres(true);
+      setPocosCaracteres(true)
     }
   }
 
@@ -108,9 +108,9 @@ export default function Capitulo(props) {
                 value={textoEditable}
                 maxLength="400"
                 onChange={(e) => {
-                  setTextoEditable(e.target.value);
+                  setTextoEditable(e.target.value)
                   if (e.target.value.length === 400)
-                    toast(Toast.muchosCaracteres);
+                    toast(Toast.muchosCaracteres)
                 }}
                 isInvalid={pocosCaracteres ? "true" : "false"}
                 size="xl"
@@ -124,8 +124,8 @@ export default function Capitulo(props) {
               </Button>
               <Button
                 onClick={() => {
-                  setTextoEditable(props.contenido);
-                  onClose();
+                  setTextoEditable(props.contenido)
+                  onClose()
                 }}
               >
                 Cancelar
@@ -135,5 +135,5 @@ export default function Capitulo(props) {
         </Modal>
       </Box>
     </>
-  );
+  )
 }

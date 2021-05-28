@@ -1,37 +1,37 @@
-import { useRouter } from "next/router";
-import Inicio from "./index";
-import useSwr from "swr";
-import { useEffect, useState } from "react";
-import { Grid, Spinner } from "@chakra-ui/core";
-import Layout from "../components/Layout";
-import Nav from "../components/Nav";
+import { useRouter } from "next/router"
+import Inicio from "./index"
+import useSwr from "swr"
+import { useEffect, useState } from "react"
+import { Grid, Spinner } from "@chakra-ui/core"
+import Layout from "../components/Layout"
+import Nav from "../components/Nav"
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Sala() {
-  const router = useRouter();
-  const sala = router.query.sala;
-  const [existeSala, setExisteSala] = useState(false);
-  const { data, error } = useSwr(`api/salas`, fetcher);
+  const router = useRouter()
+  const sala = router.query.sala
+  const [existeSala, setExisteSala] = useState(false)
+  const { data, error } = useSwr(`api/salas`, fetcher)
 
   useEffect(() => {
     if (data) {
-      setExisteSala(chequearSiExisteSala(data.URLsDeSalas));
+      setExisteSala(chequearSiExisteSala(data.URLsDeSalas))
     }
-  }, [data]);
+  }, [data])
 
   function chequearSiExisteSala(salas) {
-    let haySala = false;
+    let haySala = false
     salas.forEach((salaUrl) => {
       if (salaUrl === sala) {
-        haySala = true;
-        return haySala;
+        haySala = true
+        return haySala
       }
-    });
-    return haySala;
+    })
+    return haySala
   }
 
-  if (error) return <h5>Ocurrió algún error.</h5>;
+  if (error) return <h5>Ocurrió algún error.</h5>
   if (!data)
     return (
       <Layout>
@@ -48,7 +48,7 @@ export default function Sala() {
           />
         </Grid>
       </Layout>
-    );
+    )
 
-  return <Inicio sala={sala} existeSala={existeSala} />;
+  return <Inicio sala={sala} existeSala={existeSala} />
 }

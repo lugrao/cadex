@@ -20,6 +20,6 @@ const Toast = {
     duration: 5000,
     isClosable: true,
   },
-};
+}
 
-export default Toast;
+export default Toast
