@@ -87,7 +87,6 @@ export default function Inicio({ sala, existeSala }) {
             <Link href="NuevaHistoria" color="yellow.600">
               {" "}
               crearla
-              {salaActiva.salaNombre}
             </Link>
             .
           </Heading>
