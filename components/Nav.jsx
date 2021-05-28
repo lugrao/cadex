@@ -52,7 +52,7 @@ export default function Nav(props) {
         alignSelf="center"
         textShadow="3px 3px 1px #975A16"
       >
-        <Link href="index">
+        <Link href="/">
           <a>cadex</a>
         </Link>
       </Heading>
