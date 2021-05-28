@@ -18,11 +18,15 @@ export default function Nav(props) {
 
   useEffect(() => {
     if (props.enInicio) {
-      fetch("api/salas-en-inicio")
-        .then((res) => res.json())
-        .then((data) => {
-          setSalasEnInicio(data.salasEnInicio)
-        })
+      try {
+        fetch("api/salas-en-inicio")
+          .then((res) => res.json())
+          .then((data) => {
+            setSalasEnInicio(data.salasEnInicio)
+          })
+      } catch (error) {
+        console.log(error)
+      }
     }
   }, [props.enInicio])
 
