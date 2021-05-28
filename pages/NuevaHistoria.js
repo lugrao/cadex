@@ -25,6 +25,7 @@ export default function NuevaHistoria() {
   const [urlDeSala, setUrlDeSala] = useState("")
   const [urlNoDisponible, setUrlNoDisponible] = useState(false)
   const [enInicio, setEnInicio] = useState(true)
+  const [redireccionando, setRedireccionando] = useState(false)
   const { data, error } = useSwr(`api/salas`, fetcher)
 
   function actualizarNombreDeSala(event) {
@@ -59,13 +60,18 @@ export default function NuevaHistoria() {
       } catch (error) {
         console.log(error)
       }
-
-      Router.push(`/${urlDeSala}`)
+      setRedireccionando(true)
     } else {
       return setUrlNoDisponible(true)
     }
   }
 
+  if (redireccionando) {
+    setTimeout(() => {
+      Router.push(`/${urlDeSala}`)
+    }, 3500)
+    return <SinData />
+  }
   if (error) return <h5>Ocurrió algún error.</h5>
   if (!data) return <SinData />
 
