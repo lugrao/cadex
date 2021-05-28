@@ -104,7 +104,7 @@ export default function Nav(props) {
               {isOpen ? "Menos" : "Más"}
             </MenuButton>
             <MenuList>
-              <Link href="index">
+              <Link href="/">
                 <a>
                   <MenuItem>
                     <p>Inicio</p>
