@@ -47,14 +47,19 @@ export default function NuevaHistoria() {
 
   function crearNuevaHistoria() {
     if (urlDeSala) {
-      fetch(`api/nueva-historia/`, {
-        method: "post",
-        body: JSON.stringify({
-          salaNombre: nombreDeSala,
-          salaURL: urlDeSala,
-          enInicio: enInicio,
-        }),
-      })
+      try {
+        fetch(`api/nueva-historia/`, {
+          method: "post",
+          body: JSON.stringify({
+            salaNombre: nombreDeSala,
+            salaURL: urlDeSala,
+            enInicio: enInicio,
+          }),
+        })
+      } catch (error) {
+        console.log(error)
+      }
+
       Router.push(`/${urlDeSala}`)
     } else {
       return setUrlNoDisponible(true)
