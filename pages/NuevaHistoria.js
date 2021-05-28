@@ -2,6 +2,7 @@ import Layout from "../components/Layout"
 import Nav from "../components/Nav"
 import SinData from "../components/SinData"
 import { useState } from "react"
+import { useFetchUser } from "../lib/user"
 import useSwr from "swr"
 import _ from "lodash"
 import Router from "next/router"
@@ -21,6 +22,7 @@ import {
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function NuevaHistoria() {
+  const { user, loading } = useFetchUser()
   const [nombreDeSala, setNombreDeSala] = useState("")
   const [urlDeSala, setUrlDeSala] = useState("")
   const [urlNoDisponible, setUrlNoDisponible] = useState(false)
@@ -77,7 +79,7 @@ export default function NuevaHistoria() {
 
   return (
     <Layout>
-      <Nav nuevaHistoria={true} />
+      <Nav nuevaHistoria={true} usuario={user} />
       <Grid
         maxW="33rem"
         p="5rem 10px"
