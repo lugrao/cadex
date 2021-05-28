@@ -1,6 +1,5 @@
 import Layout from "../components/Layout"
 import Nav from "../components/Nav"
-import Footer from "../components/Footer"
 import Historia from "../components/Historia"
 import { useState, useEffect } from "react"
 import { useFetchUser } from "../lib/user"
@@ -93,7 +92,6 @@ export default function Inicio({ sala, existeSala }) {
             .
           </Heading>
         )}
-        {/* <Footer /> */}
       </Grid>
     </Layout>
   )
