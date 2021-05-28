@@ -19,22 +19,35 @@ handler.get(async (req, res) => {
           salaURL: slug[1],
         })
         res.json(historia)
-      } catch (err) {
-        console.log(err)
+      } catch (error) {
+        console.log(error)
+        res.send(error)
       }
+      break
 
-      break
     case "salas":
-      let historias = await req.db
-        .collection("historias")
-        .findOne({ _id: ObjectId("5ebbfeabf739b325f0112064") })
-      res.json(historias)
+      try {
+        let historias = await req.db
+          .collection("historias")
+          .findOne({ _id: ObjectId("5ebbfeabf739b325f0112064") })
+        res.json(historias)
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+      }
       break
+
     case "salas-en-inicio":
-      let salasEnInicio = await req.db
-        .collection("historias")
-        .findOne({ _id: ObjectId("5ed9bf659c3f650008f325bf") })
-      res.json(salasEnInicio)
+      try {
+        let salasEnInicio = await req.db
+          .collection("historias")
+          .findOne({ _id: ObjectId("5ed9bf659c3f650008f325bf") })
+        res.json(salasEnInicio)
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+      }
+      break
   }
 })
 
@@ -48,97 +61,131 @@ handler.post(async (req, res) => {
 
   switch (slug[0]) {
     case "publicar":
-      await req.db.collection("historias").updateOne(
-        {
-          salaURL: slug[1],
-        },
-        {
-          $push: {
-            historia: {
-              _id: ObjectId(),
-              contenido: data.contenido,
-              idUsuario: data.idUsuario,
-            },
-          },
-        }
-      )
-      res.send("ok")
-      break
-    case "nueva-historia":
-      let salaNombre = data.salaNombre
-      let salaURL = data.salaURL
-      await req.db.collection("historias").insertOne({
-        salaNombre: salaNombre,
-        salaURL: salaURL,
-        enInicio: data.enInicio,
-        historia: [],
-      })
-      await req.db.collection("historias").updateOne(
-        {
-          _id: ObjectId("5ebbfeabf739b325f0112064"),
-        },
-        {
-          $push: {
-            URLsDeSalas: salaURL,
-          },
-        }
-      )
-      if (data.enInicio) {
+      try {
         await req.db.collection("historias").updateOne(
           {
-            _id: ObjectId("5ed9bf659c3f650008f325bf"),
+            salaURL: slug[1],
           },
           {
             $push: {
-              salasEnInicio: {
-                salaNombre: salaNombre,
-                salaURL: salaURL,
+              historia: {
+                _id: ObjectId(),
+                contenido: data.contenido,
+                idUsuario: data.idUsuario,
               },
             },
-          },
-          (err, result) => {
-            if (err) res.send(err)
-            res.send("Historia creada con éxito.")
           }
         )
+        res.send("capítulo publicado")
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+      }
+      break
+
+    case "nueva-historia":
+      let salaNombre = data.salaNombre
+      let salaURL = data.salaURL
+
+      try {
+        await req.db.collection("historias").insertOne({
+          salaNombre: salaNombre,
+          salaURL: salaURL,
+          enInicio: data.enInicio,
+          historia: [],
+        })
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+        break
       }
 
-      res.send("piola")
+      try {
+        await req.db.collection("historias").updateOne(
+          {
+            _id: ObjectId("5ebbfeabf739b325f0112064"),
+          },
+          {
+            $push: {
+              URLsDeSalas: salaURL,
+            },
+          }
+        )
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+        break
+      }
+
+      if (data.enInicio) {
+        try {
+          await req.db.collection("historias").updateOne(
+            {
+              _id: ObjectId("5ed9bf659c3f650008f325bf"),
+            },
+            {
+              $push: {
+                salasEnInicio: {
+                  salaNombre: salaNombre,
+                  salaURL: salaURL,
+                },
+              },
+            }
+          )
+        } catch (error) {
+          console.log(error)
+          res.send(error)
+          break
+        }
+      }
+      res.send("historia creada")
       break
+
     case "eliminar-capitulo":
       const idHistoria = data.idHistoria
       const idCapitulo = data.idCapitulo
-      await req.db.collection("historias").updateOne(
-        { _id: ObjectId(idHistoria) },
-        {
-          $pull: {
-            historia: {
-              _id: ObjectId(idCapitulo),
+
+      try {
+        await req.db.collection("historias").updateOne(
+          { _id: ObjectId(idHistoria) },
+          {
+            $pull: {
+              historia: {
+                _id: ObjectId(idCapitulo),
+              },
             },
-          },
-        },
-        (err, result) => {
-          if (err) console.log(err)
-          res.send("capítulo eliminado")
-        }
-      )
+          }
+        )
+        res.send("capítulo eliminado")
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+      }
       break
+
     case "editar-capitulo":
       const contenidoNuevo = data.contenido
       const idDeHistoria = data.idHistoria
       const idDeCapitulo = data.idCapitulo
-      await req.db.collection("historias").updateOne(
-        { _id: ObjectId(idDeHistoria), "historia._id": ObjectId(idDeCapitulo) },
-        {
-          $set: {
-            "historia.$.contenido": contenidoNuevo,
+
+      try {
+        await req.db.collection("historias").updateOne(
+          {
+            _id: ObjectId(idDeHistoria),
+            "historia._id": ObjectId(idDeCapitulo),
           },
-        },
-        (err, result) => {
-          if (err) res.send(err)
-          res.send("capítulo actualizado")
-        }
-      )
+          {
+            $set: {
+              "historia.$.contenido": contenidoNuevo,
+            },
+          }
+        )
+        res.send("capítulo actualizado")
+      } catch (error) {
+        console.log(error)
+        res.send(error)
+      }
+      break
   }
 })
 
