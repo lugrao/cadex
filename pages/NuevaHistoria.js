@@ -103,7 +103,7 @@ export default function NuevaHistoria() {
             </FormErrorMessage>
             <Text mt="40px">
               La URL de tu sala será
-              <b>{` https://cadex-2.vercel.app/`}</b>
+              <b>{` https://cadex.vercel.app/`}</b>
               <b
                 style={urlNoDisponible ? { color: "red" } : { color: "green" }}
               >
