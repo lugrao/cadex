@@ -79,7 +79,7 @@ export default function Historia(props) {
               />
             )
           })}
-          {props.salaNombre !== "Inicio" && (
+          {props.salaUrl !== "que-es-cadex" && (
             <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
           )}
         </>
