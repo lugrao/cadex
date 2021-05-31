@@ -11,7 +11,7 @@ export default function Inicio({ sala, existeSala }) {
   const [mensajeDeLoginEnviado, setMensajeDeLoginEnviado] = useState(false)
   const [scrollear, setScrollear] = useState(false)
   const [salaActiva, setSalaActiva] = useState({
-    salaURL: "prueba-3",
+    salaURL: "inicio",
     salaNombre: null,
   })
 
