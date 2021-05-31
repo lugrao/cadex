@@ -79,7 +79,9 @@ export default function Historia(props) {
               />
             )
           })}
-          <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
+          {props.salaNombre !== "Inicio" && (
+            <Redactar urlSala={props.salaUrl} usuario={props.usuario} />
+          )}
         </>
       )}
     </Grid>
