@@ -23,7 +23,7 @@ export default function Sala() {
     salas.forEach((salaUrl) => {
       if (salaUrl === sala) {
         haySala = true
-        return haySala
+        return
       }
     })
     return haySala
