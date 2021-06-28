@@ -11,7 +11,7 @@
   "author": "lugrao",
   "license": "ISC",
   "dependencies": {
-    "@auth0/nextjs-auth0": "^0.15.0",
+    "@auth0/nextjs-auth0": "^1.4.2",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
